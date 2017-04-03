@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "fedora/25-cloud-base"
+  config.vm.box = "box-cutter/fedora25"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -80,6 +80,9 @@ Vagrant.configure("2") do |config|
 
     curl --silent --location https://rpm.nodesource.com/setup_7.x | bash -
     dnf install -y nodejs
+
+    sudo npm install -g express
+    sudo npm install -g express-generator
   SHELL
   config.vm.provision "shell", inline: $script, run: "always"
 end
