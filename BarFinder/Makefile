@@ -6,7 +6,7 @@ dependencies:
 production_update:
 	sudo npm install
 
-run: dependencies, production_update
+run: dependencies production_update
 	sudo pm2 start bin/www
 
 update: production_update
