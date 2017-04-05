@@ -71,12 +71,15 @@ Vagrant.configure("2") do |config|
     sudo apt-get -y update
     sudo apt-get -y dist-upgrade
 
-    sudo apt-get install -y mariadb-server
-    sudo apt-get install -y mariadb-client
-    sudo service mysql start
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -f
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-client
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -f
+    sudo DEBIAN_FRONTEND=noninteractive service mysql start
 
     curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
     sudo apt-get install -y nodejs
+    sudo apt-get install -y -f
 
     cd /vagrant/BarFinder/
     make run

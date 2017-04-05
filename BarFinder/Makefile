@@ -4,7 +4,7 @@ dependencies:
 	sudo npm install -g pm2
 
 production_update:
-	sudo npm install
+	sudo npm install --no-bin-links
 
 run: dependencies production_update
 	sudo pm2 start bin/www
