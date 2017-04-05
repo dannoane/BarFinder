@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "box-cutter/fedora25"
+  config.vm.box = "ubuntu/trusty64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -65,24 +65,21 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   $script = <<-SHELL
-    echo "LANG=en_US.UTF-8" > /etc/environment
-    echo "LC_ALL=en_US.UTF-8" >> /etc/environment
-    localectl set-locale LANG=en_US.UTF-8
+    sudo apt-get install language-pack-UTF-8
+    sudo locale-gen UTF-8
 
-    dnf update -y
-    dnf upgrade -y
+    sudo apt-get -y update
+    sudo apt-get -y dist-upgrade
 
-    dnf install -y mariadb
-    dnf install -y mariadb-server
+    sudo apt-get install -y mariadb-server
+    sudo apt-get install -y mariadb-client
+    sudo service mysql start
 
-    systemctl start mariadb
-    systemctl enable mariadb
+    curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+    sudo apt-get install -y nodejs
 
-    curl --silent --location https://rpm.nodesource.com/setup_7.x | bash -
-    dnf install -y nodejs
-
-    sudo npm install -g express
-    sudo npm install -g express-generator
+    cd /vagrant/BarFinder/
+    make run
   SHELL
   config.vm.provision "shell", inline: $script, run: "always"
 end
