@@ -21,3 +21,10 @@ To view server logs and other info:
 `$ sudo -i pm2 monit`
 
 The web page can be found on *10.10.10.10:3000/*.
+
+## Documentation:
+ - http://es6-features.org
+ - https://expressjs.com
+ - https://github.com/Unitech/pm2
+ - http://jqfundamentals.com/chapter/jquery-basics
+ - https://pugjs.org/api/getting-started.html
