@@ -25,6 +25,13 @@ The web page can be found on *10.10.10.10:3000/*.
 ## Documentation:
  - http://es6-features.org
  - https://expressjs.com
- - https://github.com/Unitech/pm2
  - http://jqfundamentals.com/chapter/jquery-basics
  - https://pugjs.org/api/getting-started.html
+ - https://lodash.com
+ - https://notifyjs.com
+ - https://www.npmjs.com/package/mysql
+ - https://github.com/Unitech/pm2
+ - http://passportjs.org/docs
+ - https://developers.facebook.com/docs/graph-api
+ - https://www.instagram.com/developer/
+ - https://developer.foursquare.com
