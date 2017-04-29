@@ -77,6 +77,10 @@ Vagrant.configure("2") do |config|
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -f
     sudo DEBIAN_FRONTEND=noninteractive service mysql start
 
+    sudo apt-get install -y mongodb-org
+    sudo apt-get install -y mongodb-clients
+    sudo apt-get install -y mongodb-server
+
     curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
     sudo apt-get install -y nodejs
     sudo apt-get install -y -f
