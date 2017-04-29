@@ -29,9 +29,10 @@ The web page can be found on *10.10.10.10:3000/*.
  - https://pugjs.org/api/getting-started.html
  - https://lodash.com
  - https://notifyjs.com
- - https://www.npmjs.com/package/mysql
  - https://github.com/Unitech/pm2
  - http://passportjs.org/docs
  - https://developers.facebook.com/docs/graph-api
  - https://www.instagram.com/developer/
  - https://developer.foursquare.com
+ - http://mongoosejs.com/docs/guide.html
+ - https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
