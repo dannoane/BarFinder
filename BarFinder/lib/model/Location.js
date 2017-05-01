@@ -4,10 +4,34 @@ const Schema = mongoose.Schema;
 var locationSchema = new Schema({
   name: { type: String, required: true, index: true },
   facebookID: { type: String, required: true, unique: true, index: true },
-  _city: {type: Schema.Types.ObjectId, ref: 'City' },
+  _city: { type: Schema.Types.ObjectId, ref: 'City' },
+  about: String,
+  latitude: Number,
+  longitude: Number,
+  street: String,
+  checkins: Number,
+  description: String,
+  hours: Schema.Types.Mixed,
+  impressum: String,
+  rating: Number,
+  parking: {
+    lot: Number,
+    street: Number,
+    valet: Number,
+  },
+  phone: String,
+  priceRange: String,
+  ratingCount: Number,
+  _category: { type: Schema.Types.ObjectId, ref: 'Category' },
+  foodStyles: [{ type: Schema.Types.ObjectId, ref: 'FoodStyle' }],
+  paymentOptions: [{ type: Schema.Types.ObjectId, ref: 'PaymentOption' }],
+  restaurantServices: [{ type: Schema.Types.ObjectId, ref: 'RestaurantService' }],
+  restaurantSpecialties: [{ type: Schema.Types.ObjectId, ref: 'RestaurantSpecialty' }],
+  photos: [{ type: Schema.Types.ObjectId, ref: 'Photo' }],
+  events: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
 });
 
-locationSchema.pre('validate', true, function (next, done) {
+locationSchema.pre('validate', function (next) {
 
   this.constructor.findOne({ 'facebookID' : this.facebookID }, function (err, location) {
     let error = null;
@@ -17,10 +41,8 @@ locationSchema.pre('validate', true, function (next, done) {
     if (location)
       error = new Error('A location with this facebookID already exists!');
 
-    done(error);
+    next(error);
   });
-
-  next(null);
 });
 
 var Location = mongoose.model('Location', locationSchema);
