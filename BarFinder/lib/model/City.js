@@ -6,6 +6,7 @@ var citySchema = new Schema({
   latitude: { type: Number, required: true },
   longitude: { type: Number, required: true },
   radius: { type: Number, required: true },
+  locations: [{ type: Schema.Types.ObjectId, ref: 'Location' }],
 });
 
 var City = mongoose.model('City', citySchema);

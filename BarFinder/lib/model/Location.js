@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 var locationSchema = new Schema({
   name: { type: String, required: true, index: true },
   facebookID: { type: String, required: true, unique: true, index: true },
+  _city: {type: Schema.Types.ObjectId, ref: 'City' },
 });
 
 locationSchema.pre('validate', true, function (next, done) {

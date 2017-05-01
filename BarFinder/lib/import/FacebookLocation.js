@@ -62,6 +62,7 @@ module.exports.FacebookLocation = class FacebookLocation {
         return {
           'name': location.name,
           'facebookID': location.id,
+          '_city': self.city._id,
         };
       });
       each(
