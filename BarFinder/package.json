@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "async": "^2.4.0",
+    "async-each-series": "^1.1.0",
     "bl": "^1.2.0",
     "body-parser": "^1.17.1",
     "commander": "^2.9.0",
