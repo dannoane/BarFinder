@@ -22,6 +22,8 @@ var locationSchema = new Schema({
   phone: String,
   priceRange: String,
   ratingCount: Number,
+  publicTransit: String,
+  _attire: { type: Schema.Types.ObjectId, ref: 'Attire' },
   _category: { type: Schema.Types.ObjectId, ref: 'Category' },
   foodStyles: [{ type: Schema.Types.ObjectId, ref: 'FoodStyle' }],
   paymentOptions: [{ type: Schema.Types.ObjectId, ref: 'PaymentOption' }],
