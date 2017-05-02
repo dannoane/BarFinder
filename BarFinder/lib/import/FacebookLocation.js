@@ -1,6 +1,5 @@
 const request = require('request');
 const async = require('async');
-const bl = require('bl');
 const CoverBoundingBox = require('./../util/CoverBoundingBox').CoverBoundingBox;
 const Location = require('./../model/Location').Location;
 const mongoose = require('./../model/Location').mongoose;
@@ -47,12 +46,14 @@ module.exports.FacebookLocation = class FacebookLocation {
 
       if (err) {
         console.error(err.message);
+        next();
         return;
       }
 
       if (response.statusCode != 200) {
         console.error(response.statusCode);
         console.error(data);
+        next();
         return;
       }
 

@@ -23,7 +23,7 @@ eventSchema.pre('validate', function (next) {
 
     if (err)
       error = new Error('Failed to save event!');
-    if (location)
+    if (event)
       error = new Error('A event with this name already exists!');
 
     next(error);

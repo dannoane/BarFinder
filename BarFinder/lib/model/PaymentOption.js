@@ -14,7 +14,7 @@ paymentOptionSchema.pre('validate', function (next) {
 
     if (err)
       error = new Error('Failed to save paymentOption!');
-    if (location)
+    if (paymentOption)
       error = new Error('A paymentOption with this name already exists!');
 
     next(error);

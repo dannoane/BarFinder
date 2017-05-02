@@ -14,7 +14,7 @@ photoSchema.pre('validate', function (next) {
 
     if (err)
       error = new Error('Failed to save photo!');
-    if (location)
+    if (photo)
       error = new Error('A photo with this source already exists!');
 
     next(error);

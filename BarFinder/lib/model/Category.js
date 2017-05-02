@@ -14,7 +14,7 @@ categorySchema.pre('validate', function (next) {
 
     if (err)
       error = new Error('Failed to save category!');
-    if (location)
+    if (category)
       error = new Error('A category with this name already exists!');
 
     next(error);

@@ -14,7 +14,7 @@ restaurantServiceSchema.pre('validate', function (next) {
 
     if (err)
       error = new Error('Failed to save restaurantService!');
-    if (location)
+    if (restaurantService)
       error = new Error('A restaurantService with this name already exists!');
 
     next(error);

@@ -14,7 +14,7 @@ restaurantSpecialtySchema.pre('validate', function (next) {
 
     if (err)
       error = new Error('Failed to save restaurantSpecialty!');
-    if (location)
+    if (restaurantSpecialty)
       error = new Error('A restaurantSpecialty with this name already exists!');
 
     next(error);

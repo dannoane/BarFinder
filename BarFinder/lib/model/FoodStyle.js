@@ -14,7 +14,7 @@ foodStyleSchema.pre('validate', function (next) {
 
     if (err)
       error = new Error('Failed to save foodStyle!');
-    if (location)
+    if (foodStyle)
       error = new Error('A foodStyle with this name already exists!');
 
     next(error);
