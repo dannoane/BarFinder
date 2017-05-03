@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 var eventSchema = new Schema({
   name: { type: String, required: true, index: true },
+  facebookID: { type: String, required: true, index: true },
   description: String,
   attending: Number,
   interested: Number,
@@ -17,14 +18,14 @@ var eventSchema = new Schema({
 
 eventSchema.pre('validate', function (next) {
 
-  this.constructor.findOne({ 'name' : this.name }, function (err, event) {
+  this.constructor.findOne({ 'facebookID' : this.facebookID }, function (err, event) {
 
     let error = null;
 
     if (err)
       error = new Error('Failed to save event!');
     if (event)
-      error = new Error('A event with this name already exists!');
+      error = new Error('The event already exists!');
 
     next(error);
   });
