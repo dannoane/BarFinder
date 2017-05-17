@@ -8,7 +8,7 @@ router.all('^(?!/login)', require('connect-ensure-login').ensureLoggedIn());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: req.user.name });
+  res.render('home', { user: req.user });
 });
 
 module.exports = router;
