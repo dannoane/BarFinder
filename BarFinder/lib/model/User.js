@@ -9,6 +9,8 @@ var userSchema = new Schema({
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
+  groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
+  admin: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
 });
 
 userSchema.pre('validate', function (next) {
