@@ -1,35 +1,103 @@
 doctype html
-html
+html(lang='en')
   head
-    title Login
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+    // Optional theme
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css', integrity='sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp', crossorigin='anonymous')
+    link(href='https://fonts.googleapis.com/css?family=Amatic+SC:700', rel='stylesheet')
+    title The Bar Finder
+    link(rel='icon', href='images/bariconsmall.png')
   body
-    form(action='/login', method='post')
-      div
-        label Username:
-        |  
-        input(type='text', name='username')
-      div
-        label Password:
-        |  
-        input(type='password', name='password')
-      div
-        input(type='submit', value='Log In')
-    form(action='register', method='post')
-      div
-        label Name:
-        |  
-        input(type='text', name='name')
-      div
-        label Username:
-        |  
-        input(type='text', name='username')
-      div
-        label Password:
-        |  
-        input(type='password', name='password')
-      div
-        label Email:
-        |  
-        input(type='text', name='email')
-      div
-        input(type='submit', value='Register')
+    .container
+      #loginbox.mainbox.col-md-6.col-md-offset-3.col-sm8.col-sm-offset-2(style='margin-top:60px')
+        .panel.panel-info
+          .panel-heading
+            .panel-title LogIn
+            div(style='float:right ; font-size : 8-% ; position: relative ;\
+            top: -10px')
+              a(href='#', onclick="$('#loginbox').hide(); $('#passwordbox').show()") Forgot Password
+          .panel-body(style='padding-top:30px')
+            #login-alert.alert-danger.col-sm-12(style='display:none')
+            form#loginform.form-horizontal(role='form', action='/login', method='post')
+              .input-group(style='margin-bottom:25px')
+                span(class='input-group-addon')
+                  i.glyphicon.glyphicon-user
+                input#login-username.form-control(type='text', name='username', value='', placeholder='username or email')
+              .input-group(style='margin-bottom:25px')
+                span(class='input-group-addon')
+                  i.glyphicon.glyphicon-lock
+                input#login-password.form-control(type='password', placeholder='password', name='password')
+              .input-group
+                .checkbox
+                  label
+                    input#login-remember(type='checkbox', name='remember', value='1')
+                    |                                     Remember me
+              .form-group(style='margin-top:10px')
+                // Button
+                .col-sm-12.controls
+                  input.btn.btn-info(type='submit', value='Login')
+              .form-group
+                .col-md-12.control
+                  div(style='border-top: 1px solid#888; padding-top:15px; font-size:85%')
+                    | Don't have an account!
+                    a(href='#', onclick="$('#loginbox').hide(); $('#signupbox').show()")
+                      | Sign Up Here!
+      #signupbox.mainbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2(style='display:none; margin-top:50px')
+        .panel.panel-info
+          .panel-heading
+            .panel-title Sign Up
+            div(style='float:right; font-size: 85%; position: relative; top:-10px')
+              a#signinlink(href='#', onclick="$('#signupbox').hide(); $('#loginbox').show()") Sign In
+          .panel-body
+            form#signupform.form-horizontal(role='form', action='/register', method='post')
+              #signupalert.alert.alert-danger(style='display:none')
+                p Error:
+                span
+              .form-group
+                label.col-md-3.control-label(for='name') Name
+                .col-md-9
+                  input.form-control(type='text', name='name', placeholder='Name')
+              .form-group
+                label.col-md-3.control-label(for='username') User Name
+                .col-md-9
+                  input.form-control(type='text', name='username', placeholder='User Name')
+              .form-group
+                label.col-md-3.control-label(for='email') Email
+                .col-md-9
+                  input.form-control(type='text', name='email', placeholder='Email Address')
+              .form-group
+                label.col-md-3.control-label(for='password') Password
+                .col-md-9
+                  input.form-control(type='password', name='password', placeholder='Password')
+              .form-group
+                .col-md-offset-3.col-md-9
+                  input.btn.btn-info(type='submit', value='Login')
+      #passwordbox.mainbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2(style='display:none; margin-top:50px')
+        .panel.panel-info
+          .panel-heading
+            .panel-title Sign Up
+            div(style='float:right; font-size: 85%; position: relative; top:-10px')
+              a#signinlink(href='#', onclick="$('#passwordbox').hide(); $('#loginbox').show()") Sign In
+          .panel-body
+            form#forgotpasswordform.form-horizontal(,='', role='form')
+              #signupalert.alert.alert-danger(style='display:none')
+                p Error:
+                span
+              .form-group
+                label.col-md-3.control-label(for='email') Email
+                .col-md-9
+                  input.form-control(type='text', name='email', placeholder='Email Address')
+              .form-group
+                // Button
+                .col-md-offset-3.col-md-9
+                  button#btn-signup.btn.btn-info(type='button')
+                    i.icon-hand-right
+                    |  &nbsp Submit!
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+      </body>
+      </html>
