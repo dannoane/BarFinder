@@ -12,6 +12,7 @@ var userSchema = new Schema({
   groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
   admin: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
   _preferences: { type: Schema.Types.ObjectId, ref: 'Preferences' },
+  notifications: [{ type: Schema.Types.ObjectId, ref: 'Notification' }],
 });
 
 userSchema.pre('validate', function (next) {
