@@ -31,6 +31,7 @@ var locationSchema = new Schema({
   restaurantSpecialties: [{ type: Schema.Types.ObjectId, ref: 'RestaurantSpecialty' }],
   photos: [{ type: Schema.Types.ObjectId, ref: 'Photo' }],
   events: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
+  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
 });
 
 locationSchema.pre('validate', function (next) {
