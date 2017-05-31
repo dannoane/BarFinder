@@ -8,7 +8,7 @@ var attireSchema = new Schema({
 
 attireSchema.pre('validate', function (next) {
 
-  this.constructor.findOne({ 'name' : this.name }, function (err, attire) {
+  this.constructor.findOne({ 'name' : this.name, '_id' : { $ne : this._id } }, function (err, attire) {
 
     let error = null;
 

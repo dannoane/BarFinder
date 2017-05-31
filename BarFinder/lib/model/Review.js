@@ -10,7 +10,7 @@ var reviewSchema = new Schema({
 
 reviewSchema.pre('validate', function (next) {
 
-  this.constructor.findOne({'_user' : this._user, '_location' : this._location}, function (err, review) {
+  this.constructor.findOne({'_user' : this._user, '_location' : this._location, '_id' : { $ne : this._id } }, function (err, review) {
     let error = null;
 
     if (err)

@@ -8,7 +8,7 @@ var categorySchema = new Schema({
 
 categorySchema.pre('validate', function (next) {
 
-  this.constructor.findOne({ 'name' : this.name }, function (err, category) {
+  this.constructor.findOne({ 'name' : this.name, '_id' : { $ne : this._id } }, function (err, category) {
 
     let error = null;
 

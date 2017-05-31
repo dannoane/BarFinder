@@ -18,7 +18,7 @@ var eventSchema = new Schema({
 
 eventSchema.pre('validate', function (next) {
 
-  this.constructor.findOne({ 'facebookID' : this.facebookID }, function (err, event) {
+  this.constructor.findOne({ 'facebookID' : this.facebookID, '_id' : { $ne : this._id } }, function (err, event) {
 
     let error = null;
 

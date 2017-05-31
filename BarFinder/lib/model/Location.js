@@ -36,7 +36,7 @@ var locationSchema = new Schema({
 
 locationSchema.pre('validate', function (next) {
 
-  this.constructor.findOne({ 'facebookID' : this.facebookID }, function (err, location) {
+  this.constructor.findOne({ 'facebookID' : this.facebookID, '_id' : { $ne : this._id } }, function (err, location) {
     let error = null;
 
     if (err)

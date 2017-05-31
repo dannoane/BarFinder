@@ -8,7 +8,7 @@ var restaurantSpecialtySchema = new Schema({
 
 restaurantSpecialtySchema.pre('validate', function (next) {
 
-  this.constructor.findOne({ 'name' : this.name }, function (err, restaurantSpecialty) {
+  this.constructor.findOne({ 'name' : this.name, '_id' : { $ne : this._id } }, function (err, restaurantSpecialty) {
 
     let error = null;
 

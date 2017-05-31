@@ -17,7 +17,7 @@ var preferencesSchema = new Schema({
 
 preferencesSchema.pre('validate', function (next) {
 
-  this.constructor.findOne({'_user' : this._user}, function (err, preferences) {
+  this.constructor.findOne({ '_user' : this._user, '_id' : { $ne : this._id } }, function (err, preferences) {
     let error = null;
 
     if (err)

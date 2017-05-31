@@ -8,7 +8,7 @@ var paymentOptionSchema = new Schema({
 
 paymentOptionSchema.pre('validate', function (next) {
 
-  this.constructor.findOne({ 'name' : this.name }, function (err, paymentOption) {
+  this.constructor.findOne({ 'name' : this.name, '_id' : { $ne : this._id } }, function (err, paymentOption) {
 
     let error = null;
 

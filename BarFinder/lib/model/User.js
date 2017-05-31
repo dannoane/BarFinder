@@ -16,7 +16,7 @@ var userSchema = new Schema({
 });
 
 userSchema.pre('validate', function (next) {
-  this.constructor.findOne({'username': this.username}, (err, user) => {
+  this.constructor.findOne({ 'username': this.username , '_id' : { $ne : this._id } }, (err, user) => {
     let error = null;
 
     if (err)
@@ -29,7 +29,7 @@ userSchema.pre('validate', function (next) {
 });
 
 userSchema.pre('validate', function (next) {
-  this.constructor.findOne({'email': this.email}, (err, user) => {
+  this.constructor.findOne({ 'email': this.email , '_id' : { $ne : this._id } }, (err, user) => {
     let error = null;
 
     if (err)
