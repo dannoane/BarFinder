@@ -11,6 +11,9 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Amatic+SC:700', rel='stylesheet')
     script(src='https://use.fontawesome.com/39b94259c3.js')
     link(rel='stylesheet', href='/stylesheets/home.css')
+    script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    link(rel='stylesheet', href='/stylesheets/notifications.css')
+    script(src='/javascript/notifications.js')
     title The Bar Finder
     link(rel='icon', href='images/bariconsmall.png')
   body
@@ -46,12 +49,22 @@ html(lang='en')
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                   i.fa.fa-user-circle(aria-hidden='true')
-                  |  #{user.name}
+                  |                                 #{username}
                   span.caret
                 ul.dropdown-menu
                   li
                     a(href='#') Logout
       div(id='content')
+        ul.notificationList
+          each notif in notifications
+            li.notificationItem(value="ASDF")
+              a.noStyle(href="" + notif.path)
+                span.glyphicon.glyphicon-send
+                |#{notif.text}
+              button.glyphicon.glyphicon-remove(value="" + notif._id)
+          else
+            li 
+              No new notifications for you.
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
