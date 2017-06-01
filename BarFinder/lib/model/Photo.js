@@ -8,7 +8,7 @@ var photoSchema = new Schema({
 
 photoSchema.pre('validate', function (next) {
 
-  this.constructor.findOne({ 'source' : this.source }, function (err, photo) {
+  this.constructor.findOne({ 'source' : this.source, '_id' : { $ne : this._id } }, function (err, photo) {
 
     let error = null;
 

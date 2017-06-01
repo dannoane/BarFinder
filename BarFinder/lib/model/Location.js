@@ -1,6 +1,13 @@
 const mongoose = require('./../DBConnection').mongoose;
 const Schema = mongoose.Schema;
 
+var Attire = require('./Attire').Attire;
+var Category = require('./Category').Category;
+var RestaurantService = require('./RestaurantService').RestaurantService;
+var RestaurantSpecialty = require('./RestaurantSpecialty').RestaurantSpecialty;
+var FoodStyle = require('./FoodStyle').FoodStyle;
+var PaymentOption = require('./PaymentOption').PaymentOption;
+
 var locationSchema = new Schema({
   name: { type: String, required: true, index: true },
   facebookID: { type: String, required: true, unique: true, index: true },
@@ -36,7 +43,7 @@ var locationSchema = new Schema({
 
 locationSchema.pre('validate', function (next) {
 
-  this.constructor.findOne({ 'facebookID' : this.facebookID }, function (err, location) {
+  this.constructor.findOne({ 'facebookID' : this.facebookID, '_id' : { $ne : this._id } }, function (err, location) {
     let error = null;
 
     if (err)

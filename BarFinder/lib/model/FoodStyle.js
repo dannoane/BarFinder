@@ -8,7 +8,7 @@ var foodStyleSchema = new Schema({
 
 foodStyleSchema.pre('validate', function (next) {
 
-  this.constructor.findOne({ 'name' : this.name }, function (err, foodStyle) {
+  this.constructor.findOne({ 'name' : this.name, '_id' : { $ne : this._id } }, function (err, foodStyle) {
 
     let error = null;
 
