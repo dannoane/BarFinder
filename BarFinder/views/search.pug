@@ -1,0 +1,163 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+    // Optional theme
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css', integrity='sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp', crossorigin='anonymous')
+    link(href='https://fonts.googleapis.com/css?family=Amatic+SC:700', rel='stylesheet')
+    script(src='https://use.fontawesome.com/39b94259c3.js')
+    link(rel='stylesheet', href='/stylesheets/search.css')
+    link(rel='stylesheet', href='/chosen/chosen.min.css')
+    title The Bar Finder
+    //- link(rel='icon', href='bariconsmall.png')
+  body
+    .container
+      nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='#') BarFinder
+          #navbar.navbar-collapse.collapse
+            ul.nav.navbar-nav
+              li.active
+                a(href='#')
+                  i.fa.fa-home(aria-hidden='true')
+                  |  Home
+              li
+                a(href='#')
+                  i.fa.fa-users(aria-hidden='true')
+                  |  Groups
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='#')
+                  i.fa.fa-envelope(aria-hidden='true')
+                  |  Notifications
+              li
+                a(href='#')
+                  i.fa.fa-heart(aria-hidden='true')
+                  |  Preferences
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                  i.fa.fa-user-circle(aria-hidden='true')
+                  |  #{username}
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a(href='#') Logout
+          // /.nav-collapse
+        // /.container-fluid
+        //- console.log(arg)
+      #content
+        p #{selectables.categories}
+        .search-buttons
+          .half
+            button#advanced_btn.btn.btn-default.btn-lg.btn-block Advanced Search
+          .half
+            button.btn.btn-default.btn-lg.btn-block Quick Find
+        .adv-search-fields.text-center
+          #half-select.row
+            .col-sm-1
+              p Attire
+            .col-sm-5
+              select#attireSelect.multiple-select-down(multiple='')
+                // Must be changed with values from the db
+                each element in selectables.attires
+                  option(value=element) #{element}
+                else
+                  option(value=null disabled) No element to select
+            .col-sm-1 Category
+            .col-sm-5
+              select#categorySelect.multiple-select-down(multiple='')
+                each element in selectables.categories
+                  option(value=element) #{element}
+                else
+                  option(value=null disabled) No element to select
+          #half-select.row
+            .col-sm-1
+              p Cuisine
+            .col-sm-5
+              select#foodStyleSelect.multiple-select-down(multiple='')
+                // Must be changed with values from the db
+                each element in selectables.foodStyles
+                  option(value=element) #{element}
+                else
+                  option(value=null disabled) No element to select
+            .col-sm-1 Payment
+            .col-sm-5
+              select#paymentOptionSelect.multiple-select-down(multiple='')
+                each element in selectables.paymentOptions
+                  option(value=element) #{element}
+                else
+                  option(value=null disabled) No element to select
+          #half-select.row
+            .col-sm-1
+              p Services
+            .col-sm-5
+              select#restaurantServiceSelect.multiple-select-down(multiple='')
+                // Must be changed with values from the db
+                each element in selectables.restaurantServices
+                  option(value=element) #{element}
+                else
+                  option(value=null disabled) No element to select
+            .col-sm-1 Specialties
+            .col-sm-5
+              select#restaurantSpecialtySelect.multiple-select-down(multiple='')
+                each element in selectables.restaurantSpecialties
+                  option(value=element) #{element}
+                else
+                  option(value=null disabled) No element to select
+          #half-select.row
+            .col-sm-1
+              p Prices
+            .col-sm-5
+              select#priceSelect.multiple-select-down(multiple='')
+                // Must be changed with values from the db
+                option(value='$') $
+                option(value='$$') $$
+                option(value='$$$') $$$
+                option(value='$$$$') $$$$
+            .col-sm-offset-2.col-sm-3
+              button.btn.btn-default.btn-block(type='submit', id="advancedSearch") Search
+        .locations.list-group
+          .list-group-item.short-location
+            .row.location
+              h4.col-sm-3.location-name Darcula's Residence
+              span.col-sm-1.rating 8.2
+              span.col-sm-2.address Str. Mal nr. 167
+              span.col-sm-offset-1.col-sm-2.description
+                a(href='#')
+                  | See More
+                  i.fa.fa-caret-down(aria-hidden='true')
+              span.col-sm-offset-1.col-sm-2.goto-rating
+                a(href='#') Give a rating
+            .row.long-description
+              span.col-sm-12 asdfghj
+          .list-group-item.short-location
+            .row.location
+              h4.col-sm-3.location-name Dining Fancy
+              span.col-sm-1.rating 9.0
+              span.col-sm-2.address Str. Fancyyy nr. 1
+              span.col-sm-offset-1.col-sm-2.description
+                a(href='#')
+                  | See More
+                  i.fa.fa-caret-down(aria-hidden='true')
+              span.col-sm-offset-1.col-sm-2.goto-rating
+                a(href='#') Give a rating
+            .row.long-description
+              span.col-sm-12 rtyuifghjfghjfgnghjg
+              span.col-sm-12 rtyuifghjfghjfgnghjg
+              span.col-sm-12 rtyuifghjfghjfgnghjg
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+    // IMPORTANT!!!!!!!!!!!!!
+    script(src='/chosen/chosen.jquery.min.js')
+    script(src='/javascript/search.js')
