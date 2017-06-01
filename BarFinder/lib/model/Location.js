@@ -1,6 +1,13 @@
 const mongoose = require('./../DBConnection').mongoose;
 const Schema = mongoose.Schema;
 
+var Attire = require('./Attire').Attire;
+var Category = require('./Category').Category;
+var RestaurantService = require('./RestaurantService').RestaurantService;
+var RestaurantSpecialty = require('./RestaurantSpecialty').RestaurantSpecialty;
+var FoodStyle = require('./FoodStyle').FoodStyle;
+var PaymentOption = require('./PaymentOption').PaymentOption;
+
 var locationSchema = new Schema({
   name: { type: String, required: true, index: true },
   facebookID: { type: String, required: true, unique: true, index: true },
