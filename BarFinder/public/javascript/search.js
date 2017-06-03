@@ -93,7 +93,7 @@ $(document).ready(function () {
           locationRow.append("<h4 class=\"col-sm-3 location-name\">"+location.name+"</h4>");
           locationRow.append("<span class=\"col-sm-1 rating\">"+location.rating+"</span>");
           locationRow.append("<span class=\"col-sm-2 address\">"+location.street+"</span>");
-          locationRow.append("<span class=\"col-sm-offset-1 col-sm-2 description\"><a href=\"#\">See More<i class=\"fa fa-caret-down\" aria-hidden=\"true\"></i></a></span><span class=\"col-sm-offset-1 col-sm-2 goto-rating\"><a href=\"#\">Give a rating</a></span>");
+          locationRow.append("<span class=\"col-sm-offset-1 col-sm-2 description\"><a href=\"#\">See More<i class=\"fa fa-caret-down\" aria-hidden=\"true\"></i></a></span><span class=\"col-sm-offset-1 col-sm-2 goto-rating\"><a href=\"#\" class=\"\">Give a rating</a></span>");
           var locationDetails = $(".list-group-item.short-location > .row.long-description");
           locationDetails.append("<span class=\"col-sm-12\">Phone: "+location.phone+"</span>");
           locationDetails.append("<span class=\"col-sm-12\">About: "+location.about+"</span>");
