@@ -14,6 +14,9 @@ var FoodStyle = require('./../lib/model/FoodStyle').FoodStyle;
 var PaymentOption = require('./../lib/model/PaymentOption').PaymentOption;
 var RestaurantService = require('./../lib/model/RestaurantService').RestaurantService;
 var RestaurantSpecialty = require('./../lib/model/RestaurantSpecialty').RestaurantSpecialty;
+var Review = require('./../lib/model/Review').Review;
+//name Location OurLocation so it doesn`t conflict
+var OurLocation = require('./../lib/model/Location').Location;
 
 
 
@@ -123,7 +126,7 @@ router.get('/search', function(req, res, next){
     }
   ];
   async.parallel(tasks, function(err){
-    if (err) res.send(err);
+    if (err) res.send(err.message);
     res.render('search', {username: req.user.username, selectables: locals});
   })
 })
@@ -193,5 +196,30 @@ router.post('/search/locations', (req, res) => {
   FindLocations.findLocations(preferences, res);
 });
 
+router.get('/reviews', function(req, res, next){
+  OurLocation.findOne({_id: req.locationId}, function(err, location){
+    location.populate('reviews').exec(function(err, location){
+      res.render('reviews',{username: req.user.username, location: location, reviews: location.reviews});
+    })
+  })
+  res.render('reviews',{username: req.user.username, reviews: []});
+})
+
+router.post('reviews', function(req, res, next){
+  User.findOne({username: req.user.username}, function(err, user){
+    user.reviews.push( //TODO: Check this, maybe add explicitly into array?
+      {
+        _user: user._id, 
+        _location: mongoose.Types.ObjectId(req.locationId), // TODO: check this!!!
+        rating: req.rating,
+        comment: req.comment
+      }
+    );
+    user.save(function(err){
+      if (err)
+        res.send(err.message);
+    })
+  })
+})
 
 module.exports = router;
