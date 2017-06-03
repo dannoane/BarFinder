@@ -128,6 +128,29 @@ router.get('/search', function(req, res, next){
   })
 })
 
+//make plan (link location id with group(id))
+router.post('/search/makePlan', function(req, res, next){
+  Group.findOne({_id: req.groupId}, function(group, err){
+    group._location = req.locationId;
+    group.save(function (err){
+      if (err)
+          res.send(err.message);
+        else
+          res.send("SUCCESS");
+    });
+  });
+})
+
+//get groups where user is admin
+router.post('groups/administers', function(req, res, next){
+  User.findOne({id: req.user._id})
+    .populate('admin')
+      .exec(function(err, user){
+        //TODO : check sending type
+        res.send(user.admin);
+      })
+})
+
 /* GET - return locations based on user preferences */
 router.get('/search/locations', (req, res) => {
 

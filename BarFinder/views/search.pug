@@ -28,20 +28,20 @@ html(lang='en')
           #navbar.navbar-collapse.collapse
             ul.nav.navbar-nav
               li.active
-                a(href='#')
+                a(href='/search')
                   i.fa.fa-home(aria-hidden='true')
                   |  Home
               li
-                a(href='#')
+                a(href='/groups')
                   i.fa.fa-users(aria-hidden='true')
                   |  Groups
             ul.nav.navbar-nav.navbar-right
               li
-                a(href='#')
+                a(href='/notifications')
                   i.fa.fa-envelope(aria-hidden='true')
                   |  Notifications
               li
-                a(href='#')
+                a(href='/preferences')
                   i.fa.fa-heart(aria-hidden='true')
                   |  Preferences
               li.dropdown
@@ -54,14 +54,13 @@ html(lang='en')
                     a(href='#') Logout
           // /.nav-collapse
         // /.container-fluid
-        //- console.log(arg)
       #content
         p #{selectables.categories}
         .search-buttons
           .half
             button#advanced_btn.btn.btn-default.btn-lg.btn-block Advanced Search
           .half
-            button.btn.btn-default.btn-lg.btn-block Quick Find
+            button#quickSearch.btn.btn-default.btn-lg.btn-block Quick Find
         .adv-search-fields.text-center
           #half-select.row
             .col-sm-1
@@ -127,11 +126,10 @@ html(lang='en')
             .col-sm-offset-2.col-sm-3
               button.btn.btn-default.btn-block(type='submit', id="advancedSearch") Search
         .locations.list-group
-          .list-group-item.short-location
-            p 
+          p             
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
-    // IMPORTANT!!!!!!!!!!!!!
+    // IMPORTANT!!!!!!!!!!!!! 
     script(src='/chosen/chosen.jquery.min.js')
     script(src='/javascript/search.js')
