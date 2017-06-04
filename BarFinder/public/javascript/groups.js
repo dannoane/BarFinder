@@ -11,6 +11,13 @@ $(document).ready(function(){
             alert("You must enter a name")
         else
             $.post('http://10.10.10.10:3000/groups', {groupName: newName},
-            function(data){return}, 'json');
+            function(data){
+                console.log("ENTERED CALLBACK");
+                window.location.href='http://10.10.10.10:3000/groups';
+            }, 'json').done(function(){
+                    console.log("ENTERED CALLBACK");
+                    window.location.href='http://10.10.10.10:3000/groups';
+                });
+        // window.location.href='http://10.10.10.10:3000/groups';
     })
 })
