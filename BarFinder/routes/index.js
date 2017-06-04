@@ -15,7 +15,7 @@ var PaymentOption = require('./../lib/model/PaymentOption').PaymentOption;
 var RestaurantService = require('./../lib/model/RestaurantService').RestaurantService;
 var RestaurantSpecialty = require('./../lib/model/RestaurantSpecialty').RestaurantSpecialty;
 
-
+var Group = require('./../lib/model/Group').Group;
 
 const mongoose = require('./../lib/model/Notification').mongoose;
 
@@ -71,7 +71,7 @@ router.get('/search', function(req, res, next){
     },
     //populate foodStyles
     function(callback){
-      locals.foodStyles = [];
+      locals.foodStyles = [FoodStyle({name: 'test style', locations: []}), FoodStyle({name: 'test style 2', locations: []})];
       FoodStyle.find({}, function(err, foodStyles){
         if (err) return callback(err);
         foodStyles.forEach(function(element) {
@@ -194,14 +194,41 @@ router.post('/search/locations', (req, res) => {
 });
 
 router.get('/groups', function(req, res, next){
-  User.findOne({username: req.user.username}, function(err, user){
-    user.populate('groups').exec(function(user){
-      res.render('groups', {username: user.username, groups: user.groups})
-    });
-  });
+  User.findOne({username: req.user.username})
+    .populate('groups')
+      .exec(function(err, user){
+        // groups = [Group({name: "TEST"})];
+        res.render('groups', {username: req.user.username, groups: user.groups});
+      });
 })
 
 router.post('/groups', function(req, res, next){
+  User.findOne({username: req.user.username}, function(err, user){
+    if (err)
+      res.send(err.message)
+    else{
+      var newGroup = Group({
+        name: req.body.groupName,
+        date: new Date(),
+        _location: null,
+        _admin: user._id,
+        users: [user._id],
+      });
+      newGroup.save(function(err, group){
+        if (err)
+          res.send(err.message);
+        else{
+          user.groups.push(group._id);
+          user.save(function(err){
+            if (err)
+              res.send(err.message);
+            else
+              res.send("SUCCESS");
+          });
+        } 
+      })
+    }
+  });
   
 })
 
