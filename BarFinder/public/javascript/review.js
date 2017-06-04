@@ -16,6 +16,8 @@ $(document).ready(function (){
         $.post('http://10.10.10.10:3000/reviews',{rating: rating, comment: comment, locationId:locationId},
         function(data){
         $('#otherReviews').append('<li><div id="topOfReview"><span class="stars-container stars-'+rating+' ">★★★★★</span><span id="otherUsers"> <span class="glyphicon glyphicon-user"></span>' +username+ '</span></div><div id="otherComments">'+comment+'</div></li>');
-        }).always()
+        }).always(function(data, textStatus, jqXHR){
+                    $('#otherReviews').append('<li><div id="topOfReview"><span class="stars-container stars-'+rating+' ">★★★★★</span><span id="otherUsers"> <span class="glyphicon glyphicon-user"></span>' +username+ '</span></div><div id="otherComments">'+comment+'</div></li>');
+        });  
    }) 
 })
