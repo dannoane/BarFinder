@@ -222,11 +222,18 @@ router.post('/groups', function(req, res, next){
           res.send(err.message);
         else{
           user.groups.push(group._id);
-          user.save(function(err){
+          user.save(function(err, user2){
             if (err)
               res.send(err.message);
-            else
-              res.send("SUCCESS");
+            else{
+              // res.send(200);
+              // res.writeHead(200, {"Content-Type": "text/plain"});
+              // res.end("Hello!!");
+                res.writeHead(301,
+                  {Location: 'http://10.10.10.10:3000/groups'}
+                  );
+                res.end();
+            }
           });
         } 
       })
