@@ -193,5 +193,16 @@ router.post('/search/locations', (req, res) => {
   FindLocations.findLocations(preferences, res);
 });
 
+router.get('/groups', function(req, res, next){
+  User.findOne({username: req.user.username}, function(err, user){
+    user.populate('groups').exec(function(user){
+      res.render('groups', {username: user.username, groups: user.groups})
+    });
+  });
+})
+
+router.post('/groups', function(req, res, next){
+  
+})
 
 module.exports = router;
