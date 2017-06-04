@@ -87,6 +87,7 @@ $(document).ready(function () {
   }
 
   function populateLocationsList(data){
+        console.log("ENTERED CALLBACK");
         data.locations.forEach(function(location) { //TODO: how does the server send the info? only this row needs change
           $(".locations.list-group").append("<div class=\"list-group-item short-location\"><div class=\"row location\"></div><div class=\"row long-description\"></div></div>");
           var locationRow = $(".list-group-item.short-location > .row.location");
@@ -138,8 +139,20 @@ $(document).ready(function () {
 
   $("#quickSearch").click(function(){
     $(".locations.list-group").empty();
-    $get("http://10.10.10.10:3000/search/locations",
-    {},
+    var preferences = getCustomPreferences();
+    $.get("http://10.10.10.10:3000/search/locations",
+    {
+      attires : preferences.attires,
+      categories : preferences.categories,
+      foodStyles : preferences.foodStyles,
+      paymentOptions : preferences.paymentOptions,
+      restaurantServices : preferences.restaurantServices,
+      restaurantSpecialties : preferences.restaurantSpecialties,
+      priceRange : preferences.priceRange,
+      latitude : preferences.latitude,
+      longitude : preferences.longitude,
+      radius : preferences.radius
+    },
     populateLocationsList, "json"
     );
   })
