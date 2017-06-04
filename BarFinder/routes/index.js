@@ -242,4 +242,85 @@ router.post('/groups', function(req, res, next){
   
 })
 
+router.get('/preferences', function(req, res, next){
+  var locals = {};
+  var tasks = [
+    //populate attires
+    function(callback){
+      locals.attires = [];
+      Attire.find({}, function(err, attires){
+        if (err) return callback(err);
+        attires.forEach(function(element) {
+          locals.attires.push(element.name);
+        }, this);
+        callback();
+      })
+    },
+    //populate foodStyles
+    function(callback){
+      locals.foodStyles = [FoodStyle({name: 'test style', locations: []}), FoodStyle({name: 'test style 2', locations: []})];
+      FoodStyle.find({}, function(err, foodStyles){
+        if (err) return callback(err);
+        foodStyles.forEach(function(element) {
+          locals.foodStyles.push(element.name);
+        }, this);
+        callback();
+      })
+    },
+    //populate services
+    function(callback){
+      locals.restaurantServices = [];
+      RestaurantService.find({}, function(err, restaurantServices){
+        if (err) return callback(err);
+        restaurantServices.forEach(function(element) {
+          locals.restaurantServices.push(element.name);
+        }, this);
+        callback();
+      })
+    },
+    function(callback){
+      locals.categories = [];
+      Category.find({}, function(err, categories){
+        if (err) return callback(err);
+        categories.forEach(function(element) {
+          locals.categories.push(element.name);
+        }, this);
+        callback();
+      })
+    },
+    function(callback){
+      locals.paymentOptions = [];
+      PaymentOption.find({}, function(err, paymentOptions){
+        if (err) return callback(err);
+        paymentOptions.forEach(function(element) {
+          locals.paymentOptions.push(element.name);
+        }, this);
+        callback();
+      })
+    },
+    function(callback){
+      locals.restaurantSpecialties = [];
+      RestaurantSpecialty.find({}, function(err, restaurantSpecialties){
+        if (err) return callback(err);
+        restaurantSpecialties.forEach(function(element) {
+          locals.restaurantSpecialties.push(element.name);
+        }, this);
+        callback();
+      })
+    },
+    function(callback){
+      User.findOne({username: req.user.username})
+        .populate('_preferences')
+          .exec(function(err, user){
+            user._preferences.populate()
+          }
+          )
+    }
+  ];
+  async.parallel(tasks, function(err){
+    if (err) res.send(err);
+    res.render('preferences', {username: req.user.username, selectables: locals});
+  })
+})
+
 module.exports = router;
