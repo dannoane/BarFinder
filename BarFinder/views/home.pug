@@ -23,7 +23,7 @@ html(lang='en')
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            a.navbar-brand(href='#') BarFinder
+            a.navbar-brand(href='http://10.10.10.10:3000/') BarFinder
           #navbar.navbar-collapse.collapse
             ul.nav.navbar-nav
               li.active
@@ -52,6 +52,9 @@ html(lang='en')
                   li
                     a(href='#') Logout
       div(id='content')
+        ul
+          each us in users
+            li #{us}
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')

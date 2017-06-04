@@ -29,7 +29,10 @@ router.all('^(?!/login)', require('connect-ensure-login').ensureLoggedIn());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('home', { user: req.user });
+  User.find({}, function(err, users){
+    res.render('home', { user: req.user , users: users});
+  })
+  // res.render('home', { user: req.user });
 });
 
 router.get('/notifications', function(req, res, next){

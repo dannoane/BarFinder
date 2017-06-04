@@ -24,7 +24,7 @@ html(lang='en')
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            a.navbar-brand(href='#') BarFinder
+            a.navbar-brand(href='http://10.10.10.10:3000/') BarFinder
           #navbar.navbar-collapse.collapse
             ul.nav.navbar-nav
               li.active
@@ -69,14 +69,14 @@ html(lang='en')
               select#attireSelect.multiple-select-down(multiple='')
                 // Must be changed with values from the db
                 each element in selectables.attires
-                  option(value=element) #{element}
+                  option(value=element) #{element.name}
                 else
                   option(value=null disabled) No element to select
             .col-sm-1 Category
             .col-sm-5
               select#categorySelect.multiple-select-down(multiple='')
                 each element in selectables.categories
-                  option(value=element) #{element}
+                  option(value=element) #{element.name}
                 else
                   option(value=null disabled) No element to select
           #half-select.row
@@ -86,14 +86,14 @@ html(lang='en')
               select#foodStyleSelect.multiple-select-down(multiple='')
                 // Must be changed with values from the db
                 each element in selectables.foodStyles
-                  option(value=element) #{element}
+                  option(value=element) #{element.name}
                 else
                   option(value=null disabled) No element to select
             .col-sm-1 Payment
             .col-sm-5
               select#paymentOptionSelect.multiple-select-down(multiple='')
                 each element in selectables.paymentOptions
-                  option(value=element) #{element}
+                  option(value=element) #{element.name}
                 else
                   option(value=null disabled) No element to select
           #half-select.row
@@ -103,14 +103,14 @@ html(lang='en')
               select#restaurantServiceSelect.multiple-select-down(multiple='')
                 // Must be changed with values from the db
                 each element in selectables.restaurantServices
-                  option(value=element) #{element}
+                  option(value=element) #{element.name}
                 else
                   option(value=null disabled) No element to select
             .col-sm-1 Specialties
             .col-sm-5
               select#restaurantSpecialtySelect.multiple-select-down(multiple='')
                 each element in selectables.restaurantSpecialties
-                  option(value=element) #{element}
+                  option(value=element) #{element.name}
                 else
                   option(value=null disabled) No element to select
           #half-select.row
