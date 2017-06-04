@@ -196,13 +196,15 @@ router.post('/search/locations', (req, res) => {
   FindLocations.findLocations(preferences, res);
 });
 
-router.get('/reviews', function(req, res, next){
-  OurLocation.findOne({_id: req.locationId}, function(err, location){
-    location.populate('reviews').exec(function(err, location){
-      res.render('reviews',{username: req.user.username, location: location, reviews: location.reviews});
-    })
-  })
-  res.render('reviews',{username: req.user.username, reviews: []});
+router.get('/reviews/:locationId', function(req, res, next){
+  OurLocation.findOne({_id: req.params["locationId"]}, function(err, location){
+    if (err)
+      res.send(err.message)
+    else
+      location.populate('reviews').exec(function(err, location){
+        res.render('reviews',{username: req.user.username, location: location, reviews: location.reviews});
+      })
+  });
 })
 
 router.post('reviews', function(req, res, next){
