@@ -2,8 +2,14 @@ $(document).ready(function() {
 
     $("li button.glyphicon-remove").on("click",function () {
         event.stopPropagation();
-        $.post("http://10.10.10.10:3000/notifications/delete", {notificationId: $(this).attr("value")}, function(response){
-                $(this).parent().remove();
-        });
+            $.ajax({
+            type: "POST",
+            url: "http://10.10.10.10:3000/notifications/delete",
+            data: {notificationId: $(this).attr("value")},
+            success: function(data, textStatus, jqXHR){$(this).parent().remove();},
+            dataType: "json"
+            }).always(function(data, textStatus, jqXHR){
+                    $(this).parent().remove();
+            });   
      });
 });
