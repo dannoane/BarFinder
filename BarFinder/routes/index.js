@@ -170,21 +170,25 @@ router.get('/search/locations', (req, res) => {
       if (err) {
         res.send({ 'error' : err.message });
       }
+      if (preferences){
+        let pref = {
+          'attires' : _.map(preferences.attires, a => a.name),
+          'categories' : _.map(preferences.categories, c => c.name),
+          'foodStyles' : _.map(preferences.foodStyles, fs => fs.name),
+          'paymentOptions' : _.map(preferences.paymentOptions, po => po.name),
+          'restaurantServices' : _.map(preferences.restaurantServices, rs => rs.name),
+          'restaurantSpecialties' : _.map(preferences.restaurantSpecialties, rs => rs.name),
+          'priceRange': preferences.priceRange,
+          'latitude': preferences.latitude,
+          'longitude': preferences.longitude,
+          'radius': preferences.radius,
+        };
 
-      let pref = {
-        'attires' : _.map(preferences.attires, a => a.name),
-        'categories' : _.map(preferences.categories, c => c.name),
-        'foodStyles' : _.map(preferences.foodStyles, fs => fs.name),
-        'paymentOptions' : _.map(preferences.paymentOptions, po => po.name),
-        'restaurantServices' : _.map(preferences.restaurantServices, rs => rs.name),
-        'restaurantSpecialties' : _.map(preferences.restaurantSpecialties, rs => rs.name),
-        'priceRange': preferences.priceRange,
-        'latitude': preferences.latitude,
-        'longitude': preferences.longitude,
-        'radius': preferences.radius,
-      };
-
-      FindLocations.findLocations(prefs, res);
+        FindLocations.findLocations(pref, res);
+      }
+      else{
+        res.send("")
+      }
     });
 });
 

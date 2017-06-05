@@ -141,18 +141,7 @@ $(document).ready(function () {
     $(".locations.list-group").empty();
     var preferences = getCustomPreferences();
     $.get("http://10.10.10.10:3000/search/locations",
-    {
-      attires : preferences.attires,
-      categories : preferences.categories,
-      foodStyles : preferences.foodStyles,
-      paymentOptions : preferences.paymentOptions,
-      restaurantServices : preferences.restaurantServices,
-      restaurantSpecialties : preferences.restaurantSpecialties,
-      priceRange : preferences.priceRange,
-      latitude : preferences.latitude,
-      longitude : preferences.longitude,
-      radius : preferences.radius
-    },
+    {},
     populateLocationsList, "json"
     );
   })
