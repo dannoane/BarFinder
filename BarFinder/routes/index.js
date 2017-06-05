@@ -309,17 +309,42 @@ router.get('/preferences', function(req, res, next){
       })
     },
     function(callback){
-      User.findOne({username: req.user.username})
-        .populate('_preferences')
-          .exec(function(err, user){
-            user._preferences.populate()
-          }
-          )
+        locals.preferences = {};
+        Preferences.findOne({_user: req.user._id})
+          .populate('attires')
+          .populate('categories')
+          .populate('foodStyles')
+          .populate('paymentOptions')
+          .populate('restaurantServices')
+          .populate('restaurantSpecialties')
+          .populate('priceRange')
+          .exec(function(err, pref){
+            if (pref)
+              locals.preferences = pref;
+            callback();
+          })
     }
   ];
   async.parallel(tasks, function(err){
     if (err) res.send(err);
     res.render('preferences', {username: req.user.username, selectables: locals});
+  })
+})
+
+router.post('/preferences', function(req, res, next){
+  Preferences.findOne({_user: req.user._id}, function(err, pref){
+    if(err)
+      res.send(err.message);
+    else{
+      var preferences = req.body.preferences;
+      if (pref){//user already has preferences
+
+      } 
+      else{//user has no preferences yet
+        var newPreference = Preferences()
+      }
+      
+    }
   })
 })
 
