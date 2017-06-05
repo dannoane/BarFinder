@@ -7,7 +7,7 @@ var FindLocations = require('./../lib/util/FindLocations');
 var _ = require('lodash');
 
 // ensure user is loged in
-router.all('^(?!/login)', require('connect-ensure-login').ensureLoggedIn());
+router.all(/^\/(?!login).*$/, require('connect-ensure-login').ensureLoggedIn());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
