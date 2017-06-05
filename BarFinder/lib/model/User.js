@@ -51,11 +51,19 @@ userSchema.pre('validate', function (next) {
 });
 
 userSchema.pre('save', function (next) {
-  const hash = crypto.createHash('sha256');
-  hash.update(this.password);
-  this.password = hash.digest('hex');
+  
+  this.constructor.findOne({ 'username': this.username }, (err, user) => {
+    if(user){
+      next();
+    }
+    else{
+      const hash = crypto.createHash('sha256');
+      hash.update(this.password);
+      this.password = hash.digest('hex');
 
-  next();
+      next();
+    }
+  });
 });
 
 userSchema.pre('save', function (next) {

@@ -11,6 +11,7 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Amatic+SC:700', rel='stylesheet')
     script(src='https://use.fontawesome.com/39b94259c3.js')
     link(rel='stylesheet', href='/stylesheets/home.css')
+    link(rel='stylesheet', href='/stylesheets/groups.css')
     title The Bar Finder
     link(rel='icon', href='images/bariconsmall.png')
   body
@@ -46,13 +47,29 @@ html(lang='en')
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                   i.fa.fa-user-circle(aria-hidden='true')
-                  |  #{user.name}
+                  |  #{username}
                   span.caret
                 ul.dropdown-menu
                   li
                     a(href='#') Logout
       div(id='content')
+        ul.notificationList
+          each group in groups
+            li.notificationItem(value="")
+              a.noStyle(href="/group/" + group._id)
+                span.glyphicon.glyphicon-send
+                |#{group.name}
+          else
+            li 
+              p You are not part of any groups.
+        button#addGroup.btn(type='button') Add a group
+        div.form-inline(style='display: block' id="addForm")
+            .form-group
+                label(for='groupName') Name your group:   
+                input#groupName.form-control(type='text')
+            button#saveButton.btn.btn-default Submit
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
     script(src='/javascript/home.js')
+    script(src='/javascript/groups.js')
