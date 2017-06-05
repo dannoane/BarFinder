@@ -184,7 +184,7 @@ router.get('/search/locations', (req, res) => {
         'radius': preferences.radius,
       };
 
-      FindLocations.findLocations(prefs, res);
+      FindLocations.findLocations(pref, res);
     });
 });
 
@@ -192,6 +192,7 @@ router.get('/search/locations', (req, res) => {
 router.post('/search/locations', (req, res) => {
 
   let preferences = req.body;
+  console.log(preferences);
 
   FindLocations.findLocations(preferences, res);
 });

@@ -35,7 +35,6 @@ function findLocations(preferences, res) {
               Math.sin(dLon/2) * Math.sin(dLon/2);
       var c = 2 * Math.asin(Math.sqrt(a));
       var d = R * c;
-      console.log(d);
       return d;
     };
 
@@ -72,14 +71,14 @@ function findLocations(preferences, res) {
     }
 
     if (preferences.restaurantServices != null) {
-      let matchingFs = _.intersection(preferences.restaurantServices, _.map(location.restaurantServices, rs => rs.name))
+      let matchingRs = _.intersection(preferences.restaurantServices, _.map(location.restaurantServices, rs => rs.name))
       _.forEach(matchingRs, (rs) => {
         score += 10;
       });
     }
 
     if (preferences.restaurantSpecialties != null) {
-      let matchingFs = _.intersection(preferences.restaurantSpecialties, _.map(location.restaurantSpecialties, rs => rs.name))
+      let matchingRs = _.intersection(preferences.restaurantSpecialties, _.map(location.restaurantSpecialties, rs => rs.name))
       _.forEach(matchingRs, (rs) => {
         score += 10;
       });
