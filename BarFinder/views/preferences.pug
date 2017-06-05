@@ -61,6 +61,9 @@ html(lang='en')
             .col-sm-5
               select#attireSelect.multiple-select-down(multiple='')
                 // Must be changed with values from the db
+                if selectables.preferences.attires
+                  each el in selectables.preferences.attires
+                    option(value=el selected) #{el.name}
                 each element in selectables.attires
                   option(value=element) #{element.name}
                 else
@@ -68,6 +71,9 @@ html(lang='en')
             .col-sm-1 Category
             .col-sm-5
               select#categorySelect.multiple-select-down(multiple='')
+                if selectables.preferences.categories
+                  each el in selectables.preferences.categories
+                    option(value=el selected) #{el.name}
                 each element in selectables.categories
                   option(value=element) #{element.name}
                 else
@@ -81,8 +87,6 @@ html(lang='en')
                 if selectables.preferences.foodStyles
                   each el in selectables.preferences.foodStyles
                     option(value=el selected) #{el.name}
-                  else
-                    p no el
                 each element in selectables.foodStyles
                   option(value=element) #{element.name}
                 else
@@ -90,6 +94,9 @@ html(lang='en')
             .col-sm-1 Payment
             .col-sm-5
               select#paymentOptionSelect.multiple-select-down(multiple='')
+                if selectables.preferences.paymentOptions
+                  each el in selectables.preferences.paymentOptions
+                    option(value=el selected) #{el.name}
                 each element in selectables.paymentOptions
                   option(value=element) #{element.name}
                 else
@@ -98,8 +105,11 @@ html(lang='en')
             .col-sm-1
               p Services
             .col-sm-5
-              select#restaurantServiceSelect.multiple-select-down(multiple='')
+              select#restaurantServicesSelect.multiple-select-down(multiple='')
                 // Must be changed with values from the db
+                if selectables.preferences.restaurantServices
+                  each el in selectables.preferences.restaurantServices
+                    option(value=el selected) #{el.name}
                 each element in selectables.restaurantServices
                   option(value=element) #{element.name}
                 else
@@ -107,6 +117,9 @@ html(lang='en')
             .col-sm-1 Specialties
             .col-sm-5
               select#restaurantSpecialtySelect.multiple-select-down(multiple='')
+                if selectables.preferences.restaurantSpecialties
+                  each el in selectables.preferences.restaurantSpecialties
+                    option(value=el selected) #{el.name}
                 each element in selectables.restaurantSpecialties
                   option(value=element) #{element.name}
                 else

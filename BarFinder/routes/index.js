@@ -251,18 +251,18 @@ router.get('/preferences', function(req, res, next){
       Attire.find({}, function(err, attires){
         if (err) return callback(err);
         attires.forEach(function(element) {
-          locals.attires.push(element.name);
+          locals.attires.push(element);
         }, this);
         callback();
       })
     },
     //populate foodStyles
     function(callback){
-      locals.foodStyles = [FoodStyle({name: 'test style', locations: []}), FoodStyle({name: 'test style 2', locations: []})];
+      locals.foodStyles = [];
       FoodStyle.find({}, function(err, foodStyles){
         if (err) return callback(err);
         foodStyles.forEach(function(element) {
-          locals.foodStyles.push(element.name);
+          locals.foodStyles.push(element);
         }, this);
         callback();
       })
@@ -273,7 +273,7 @@ router.get('/preferences', function(req, res, next){
       RestaurantService.find({}, function(err, restaurantServices){
         if (err) return callback(err);
         restaurantServices.forEach(function(element) {
-          locals.restaurantServices.push(element.name);
+          locals.restaurantServices.push(element);
         }, this);
         callback();
       })
@@ -283,7 +283,7 @@ router.get('/preferences', function(req, res, next){
       Category.find({}, function(err, categories){
         if (err) return callback(err);
         categories.forEach(function(element) {
-          locals.categories.push(element.name);
+          locals.categories.push(element);
         }, this);
         callback();
       })
@@ -293,7 +293,7 @@ router.get('/preferences', function(req, res, next){
       PaymentOption.find({}, function(err, paymentOptions){
         if (err) return callback(err);
         paymentOptions.forEach(function(element) {
-          locals.paymentOptions.push(element.name);
+          locals.paymentOptions.push(element);
         }, this);
         callback();
       })
@@ -303,7 +303,7 @@ router.get('/preferences', function(req, res, next){
       RestaurantSpecialty.find({}, function(err, restaurantSpecialties){
         if (err) return callback(err);
         restaurantSpecialties.forEach(function(element) {
-          locals.restaurantSpecialties.push(element.name);
+          locals.restaurantSpecialties.push(element);
         }, this);
         callback();
       })
@@ -327,23 +327,63 @@ router.get('/preferences', function(req, res, next){
   ];
   async.parallel(tasks, function(err){
     if (err) res.send(err);
-    res.render('preferences', {username: req.user.username, selectables: locals});
+    else{
+      //TODO:remove selected preference
+      res.render('preferences', {username: req.user.username, selectables: locals});
+    }
   })
 })
 
 router.post('/preferences', function(req, res, next){
+  var preferences = req.body.preferences;
   Preferences.findOne({_user: req.user._id}, function(err, pref){
     if(err)
       res.send(err.message);
     else{
-      var preferences = req.body.preferences;
       if (pref){//user already has preferences
+        pref.attires = preferences.attires;
+        pref.categories= preferences.categories;
+        pref.foodStyles= preferences.foodStyles;
+        pref.paymentOptions= preferences.paymentOptions;
+        pref.restaurantServices= preferences.restaurantServices;
+        pref.restaurantSpecialties= preferences.restaurantSpecialties;
+        pref.priceRange= preferences.priceRange;
+        pref.latitude= null;
+        pref.longitude= null;
+        pref.radius= null;
+        pref.save(function(err, pref2){
+          if(err){
+            res.send(err.message);
+          }
+          else{
+            res.send("SUCCESS");
+          }
+        })
 
       } 
       else{//user has no preferences yet
-        var newPreference = Preferences()
-      }
-      
+        var newPreference = Preferences({
+          _user: req.user._id,
+          attires: preferences.attires,
+          categories: preferences.categories,
+          foodStyles: preferences.foodStyles,
+          paymentOptions: preferences.paymentOptions,
+          restaurantServices: preferences.restaurantServices,
+          restaurantSpecialties: preferences.restaurantSpecialties,
+          priceRange: preferences.priceRange,
+          latitude: null,
+          longitude: null,
+          radius: null,
+        })
+        newPreference.save(function(err, pref2){
+          if (err){
+            res.send(err.message);
+          }
+          else{
+            res.send("SUCCESS");
+          }
+        })
+      } 
     }
   })
 })
