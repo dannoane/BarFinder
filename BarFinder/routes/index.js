@@ -77,7 +77,6 @@ router.get('/search', function(req, res, next){
     },
     //populate foodStyles
     function(callback){
-      locals.foodStyles = [FoodStyle({name: 'test style', locations: []}), FoodStyle({name: 'test style 2', locations: []})];
       FoodStyle.find({}, function(err, foodStyles){
         if (err) return callback(err);
         foodStyles.forEach(function(element) {
@@ -136,8 +135,8 @@ router.get('/search', function(req, res, next){
 
 //make plan (link location id with group(id))
 router.post('/search/makePlan', function(req, res, next){
-  Group.findOne({_id: req.groupId}, function(group, err){
-    group._location = req.locationId;
+  Group.findOne({_id: req.body.groupId}, function(err, group){
+    group._location = req.body.locationId;
     group.save(function (err){
       if (err)
           res.send(err.message);
@@ -148,8 +147,8 @@ router.post('/search/makePlan', function(req, res, next){
 })
 
 //get groups where user is admin
-router.post('groups/administers', function(req, res, next){
-  User.findOne({id: req.user._id})
+router.post('/groups/administers', function(req, res, next){
+  User.findOne({_id: req.user._id})
     .populate('admin')
       .exec(function(err, user){
         //TODO : check sending type
@@ -230,6 +229,7 @@ router.post('/groups', function(req, res, next){
           res.send(err.message);
         else{
           user.groups.push(group._id);
+          user.admin.push(group._id);
           user.save(function(err, user2){
             if (err)
               res.send(err.message);
@@ -447,7 +447,7 @@ router.get('/group/:groupId', function(req, res, next){
     .populate('users')
     .populate('_admin')
     .exec(function(err, group){
-      group._location = '59357530405bcc0f2d854eb4';
+      // group._location = '59357530405bcc0f2d854eb4';
       if(group._location){
         OurLocation.findOne({_id: group._location})
           .populate('_attire')
@@ -512,6 +512,40 @@ router.post('/group/:groupId/addUser',function(req, res, next){
           }
         }
       })
+    }
+  })
+})
+
+router.post('/group/:groupId/deleteUser', function(req, res, next){
+  Group.findOne({_id: req.params['groupId']}, function(err, group){
+    var index = group.users.indexOf(req.body.userId);
+    if (index > -1){
+      group.users.splice(index, 1);
+      group.save(function(err){
+        if (err)
+          res.send(err.message);
+        else
+          res.send("SUCCESS");
+      });
+    }
+  });
+})
+
+router.post('/group/:groupId/setDate', function(req, res, next){
+  Group.findOne({_id: req.params['groupId']}, function(err, group){
+    if (err){
+      res.send(err.message);
+    }
+    else{
+    group.date = req.body.date;
+    group.save(function(err){
+      if(err){
+        res.send(err.message);
+      }
+      else{
+        res.send("SUCCESS");
+      }
+    });
     }
   })
 })

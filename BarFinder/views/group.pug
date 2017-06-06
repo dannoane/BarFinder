@@ -84,7 +84,8 @@ html(lang='en')
                     |#{elem.name}, 
                 span.col-sm-12 Specialties: 
                   each elem in location.restaurantSpecialties
-                    |#{elem.name}, 
+                    |#{elem.name},
+          div#dateDiv #{group.date}   
         span.label.label-default(style="font-family: 'Amatic SC', cursive;") Members:
         ul#prevUsers.notificationList
           each user in group.users
