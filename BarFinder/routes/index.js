@@ -199,6 +199,7 @@ router.get('/search/locations', (req, res) => {
 router.post('/search/locations', (req, res) => {
 
   let preferences = req.body;
+  console.log(preferences);
 
   FindLocations.findLocations(preferences, res);
 });

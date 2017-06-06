@@ -35,7 +35,6 @@ function findLocations(preferences, res) {
               Math.sin(dLon/2) * Math.sin(dLon/2);
       var c = 2 * Math.asin(Math.sqrt(a));
       var d = R * c;
-      console.log(d);
       return d;
     };
 
