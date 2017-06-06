@@ -61,3 +61,7 @@ body {
 	background: #F0F8FF;
 	
 }
+
+.dropdown-item{
+  display: block;
+}

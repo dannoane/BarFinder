@@ -63,6 +63,7 @@ $(document).ready(function () {
 
   $('#savePreferences').click(function(){
     var preferences = getCustomPreferences();
+    console.log(preferences);
     $.post('http://10.10.10.10:3000/preferences',
       {preferences: preferences},
       null,

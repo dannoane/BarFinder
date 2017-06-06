@@ -77,8 +77,8 @@ $(document).ready(function () {
           locationRow.append("<h4 class=\"col-sm-3 location-name\">"+location.name+"</h4>");
           locationRow.append("<span class=\"col-sm-1 rating\">"+location.rating+"</span>");
           locationRow.append("<span class=\"col-sm-2 address\">"+location.street+"</span>");
-          locationRow.append("<span class=\"col-sm-offset-1 col-sm-2 description\"><a href=\"#\">See More<i class=\"fa fa-caret-down\" aria-hidden=\"true\"></i></a></span><span class=\"col-sm-offset-1 col-sm-2 goto-rating\"><a href=\"/reviews/"+location._id+"\">Give a rating</a></button></span>");
-          locationRow.append('<span class="dropdown col-sm-offset-1 col-sm-2"><button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown button</button><span class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a></span></span>');
+          locationRow.append("<span class=\"col-sm-2 description\"><a href=\"#\">See More<i class=\"fa fa-caret-down\" aria-hidden=\"true\"></i></a></span><span class=\"col-sm-2 goto-rating\"><a href=\"/reviews/"+location._id+"\">Give a rating</a></button></span>");
+          locationRow.append('<span class="dropdown col-sm-2"><button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Make plan</button><span class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Group 1</a><a class="dropdown-item" href="#">Group 2</a><a class="dropdown-item" href="#">Group 3</a></span></span>');
           var locationDetails = $(".list-group-item.short-location > .row.long-description");
           var listOfAttributes = [];
           locationDetails.append("<span class=\"col-sm-12\">Phone: "+location.phone+"</span>");

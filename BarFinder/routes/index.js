@@ -319,8 +319,8 @@ router.get('/preferences', function(req, res, next){
     function(callback){
         locals.preferences = {};
         Preferences.findOne({_user: req.user._id})
-          .populate('attires')
-          .populate('categories')
+          .populate('_attire')
+          .populate('_category')
           .populate('foodStyles')
           .populate('paymentOptions')
           .populate('restaurantServices')
@@ -446,13 +446,12 @@ router.get('/group/:groupId', function(req, res, next){
   Group.findOne({_id: req.params['groupId']})
     .populate('users')
     .populate('_admin')
-    // .populate('_location')
     .exec(function(err, group){
       group._location = '59357530405bcc0f2d854eb4';
       if(group._location){
         OurLocation.findOne({_id: group._location})
-          .populate('attires')
-          .populate('categories')
+          .populate('_attire')
+          .populate('_category')
           .populate('foodStyles')
           .populate('paymentOptions')
           .populate('restaurantServices')
@@ -461,7 +460,6 @@ router.get('/group/:groupId', function(req, res, next){
             if (err)
               res.send(err.message);
             else{
-              console.log(location);
               res.render('group',{username: req.user.username, group: group, location: location});
             }
           })
@@ -472,5 +470,50 @@ router.get('/group/:groupId', function(req, res, next){
     })
 })
 
+router.post('/group/:groupId/findUsers',function(req, res, next){
+  console.log(req.body.username + '.*');
+  User.find({username: new RegExp(req.body.username + '.*')}, function(err, users){
+    res.send(users);
+  })
+})
+
+router.post('/group/:groupId/addUser',function(req, res, next){
+  User.findOne({username: req.body.username}, function(err, user){
+    if (err){
+      res.send(err.message);
+    }
+    else{
+      Group.findOne({_id: req.params['groupId']}, function(err, group){
+        if (err){
+          res.send(err.message);
+        }
+        else{
+          if (_.includes(group.users, user._id)){
+            res.send("User already in group")
+          }
+          else{
+            group.users.push(user._id);
+            group.save(function(err, group){
+              if (err){
+                res.send(err.message);
+              }
+              else{
+                user.groups.push(group._id);
+                user.save(function(err){
+                  if (err){
+                    res.send(err.message);
+                  }
+                  else{
+                    res.send("SUCCESS");
+                  }
+                })
+              }
+            })
+          }
+        }
+      })
+    }
+  })
+})
 
 module.exports = router;

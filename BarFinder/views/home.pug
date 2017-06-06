@@ -46,11 +46,11 @@ html(lang='en')
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                   i.fa.fa-user-circle(aria-hidden='true')
-                  |  #{user.name}
+                  |  #{user.username}
                   span.caret
                 ul.dropdown-menu
                   li
-                    a(href='#') Logout
+                    a(href='/logout') Logout
       div(id='content')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     // Latest compiled and minified JavaScript

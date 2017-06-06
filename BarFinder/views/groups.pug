@@ -27,11 +27,11 @@ html(lang='en')
             a.navbar-brand(href='http://10.10.10.10:3000/') BarFinder
           #navbar.navbar-collapse.collapse
             ul.nav.navbar-nav
-              li.active
+              li
                 a(href='/search')
                   i.fa.fa-home(aria-hidden='true')
                   |  Home
-              li
+              li.active
                 a(href='/groups')
                   i.fa.fa-users(aria-hidden='true')
                   |  Groups
@@ -63,7 +63,7 @@ html(lang='en')
             li 
               p You are not part of any groups.
         button#addGroup.btn(type='button') Add a group
-        div.form-inline(style='display: block' id="addForm")
+        div.form-inline(style='display: none' id="addForm")
             .form-group
                 label(for='groupName') Name your group:   
                 input#groupName.form-control(type='text')

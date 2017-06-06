@@ -11,6 +11,8 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Amatic+SC:700', rel='stylesheet')
     script(src='https://use.fontawesome.com/39b94259c3.js')
     link(rel='stylesheet', href='/stylesheets/home.css')
+    link(rel='stylesheet', href='/stylesheets/search.css')
+    link(rel='stylesheet', href='/stylesheets/group.css')
     title The Bar Finder
     link(rel='icon', href='images/bariconsmall.png')
   body
@@ -26,7 +28,7 @@ html(lang='en')
             a.navbar-brand(href='http://10.10.10.10:3000/') BarFinder
           #navbar.navbar-collapse.collapse
             ul.nav.navbar-nav
-              li.active
+              li
                 a(href='/search')
                   i.fa.fa-home(aria-hidden='true')
                   |  Home
@@ -52,8 +54,55 @@ html(lang='en')
                   li
                     a(href='/logout') Logout
       div(id='content')
-        div #{group} #{location}
+        if location
+          .locations.list-group
+            .list-group-item.short-location
+              .row.location
+                h4.col-sm-3.location-name #{location.name}
+                span.col-sm-1.rating #{location.rating}
+                span.col-sm-2.address #{location.street}
+                span.col-sm-offset-1.col-sm-2.description
+                  a(href='#')
+                    | See More
+                    i.fa.fa-caret-down(aria-hidden='true')
+                span.col-sm-offset-1.col-sm-2.goto-rating
+                  a(href='/reviews/59357530405bcc0f2d854eb4') Give a rating                
+              .row.long-description(style='display: none;')
+                span.col-sm-12 Phone: #{location.phone}
+                span.col-sm-12 About: #{location.about}
+                span.col-sm-12 Price Range: #{location.priceRange}
+                span.col-sm-12 Payment:
+                  each elem in location.paymentOptions
+                    |#{elem.name}, 
+                span.col-sm-12 Attire: #{location._attire.name} 
+                span.col-sm-12 Category: #{location._category.name}, 
+                span.col-sm-12 Services: 
+                  each elem in location.restaurantServices
+                    |#{elem.name}, 
+                span.col-sm-12 Food:
+                  each elem in location.foodStyles
+                    |#{elem.name}, 
+                span.col-sm-12 Specialties: 
+                  each elem in location.restaurantSpecialties
+                    |#{elem.name}, 
+        span.label.label-default(style="font-family: 'Amatic SC', cursive;") Members:
+        ul#prevUsers.notificationList
+          each user in group.users
+              li.notificationItem(value="ASDF")
+                a.noStyle(href="")
+                  span.glyphicon.glyphicon-send
+                  |#{user.username}
+                button#removeUser.glyphicon.glyphicon-remove(value="" + user._id)
+        //- span.label.label-default(style="font-family: 'Amatic SC', cursive;") Add user
+        div.form-group
+          label(for='inputsm') Add user:
+          input#inputsm.form-control.input-sm(type='text')
+        button#searchButton.btn.btn-default() Search
+        ul#toAddUsers.notificationList
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
     script(src='/javascript/home.js')
+    script(src='/chosen/chosen.jquery.min.js')
+    script(src='/javascript/search.js')
+    script(src='/javascript/group.js')
