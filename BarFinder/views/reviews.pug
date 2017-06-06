@@ -11,8 +11,8 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Amatic+SC:700', rel='stylesheet')
     script(src='https://use.fontawesome.com/39b94259c3.js')
     // Change this accordingly --
-    link(rel='stylesheet', href='stylesheets/index.css')
-    link(rel='stylesheet', href='stylesheets/review.css')
+    link(rel='stylesheet', href='/../stylesheets/home.css')
+    link(rel='stylesheet', href='/../stylesheets/review.css')
     title The Bar Finder
     link(rel='icon', href='images/bariconsmall.png')
   body
@@ -71,31 +71,7 @@ html(lang='en')
                     span.glyphicon.glyphicon-user
                     |  #{review._user.username}
                 #otherComments
-                  | #{review.comment}                   
-            li
-              #topOfReview
-                span(class="stars-container stars-"+"50") ★★★★★
-                span#otherUsers
-                  span.glyphicon.glyphicon-user
-                  |  Nume Inventat
-              #otherComments
-                | Great place, awesome food. Too loud music
-            li
-              #topOfReview
-                span.stars-container.stars-60 ★★★★★
-                span#otherUsers
-                  span.glyphicon.glyphicon-user
-                  |  Nume Inventat
-              div
-                | Great place, awesome food. Too loud music
-            li
-              #topOfReview
-                span.stars-container.stars-30 ★★★★★
-                span#otherUsers
-                  span.glyphicon.glyphicon-user
-                  |  Nume Inventat
-              div
-                | Great place, awesome food. Too loud music
+                  | #{review.comment}                             
         #newReview
           form#leaveReview
             h2
@@ -129,9 +105,9 @@ html(lang='en')
                 span.glyphicon.glyphicon-pencil
                 |  Your impression was ...
               textarea#comment.form-control(rows='5')
-            button#submitButton.btn.btn-default(type='submit') Submit
+          button#submitButton.btn.btn-default() Submit
       script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
       // Latest compiled and minified JavaScript
       script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
-      script(src='javascript/index.js')
-      script(src='javascript/review.js')
+      script(src='/../javascript/home.js')
+      script(src='/../javascript/review.js')

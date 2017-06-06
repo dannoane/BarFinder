@@ -392,33 +392,53 @@ router.post('/preferences', function(req, res, next){
         })
       } 
     }
-
-router.get('/reviews/:locationId', function(req, res, next){
-  OurLocation.findOne({_id: req.params["locationId"]}, function(err, location){
-    if (err)
-      res.send(err.message)
-    else
-      location.populate('reviews').exec(function(err, location){
-        res.render('reviews',{username: req.user.username, location: location, reviews: location.reviews});
-      })
-  });
+  })
 })
 
-router.post('reviews', function(req, res, next){
-  User.findOne({username: req.user.username}, function(err, user){
-    user.reviews.push( //TODO: Check this, maybe add explicitly into array?
-      {
-        _user: user._id, 
-        _location: mongoose.Types.ObjectId(req.locationId), // TODO: check this!!!
-        rating: req.rating,
-        comment: req.comment
-      }
-    );
-    user.save(function(err){
-      if (err)
-        res.send(err.message);
+router.get('/reviews/:locationId', function(req, res, next){
+  // OurLocation.findOne({_id: req.params["locationId"]})
+  //   .populate('reviews')
+  //     .exec(function(err, location){
+  //       res.render('reviews',{username: req.user.username, location: location, reviews: location.reviews});
+  //     });
+  OurLocation.findOne({_id: req.params["locationId"]})
+    .populate({
+      path: 'reviews',
+      populate: {path: '_user'}
     })
-  })
+      .exec(function(err, location){
+        res.render('reviews',{username: req.user.username, location: location, reviews: location.reviews});
+      });
+})
+
+router.post('/reviews', function(req, res, next){
+  var newReview = Review({
+        _user: req.user._id, 
+        _location: req.body.locationId, // TODO: check this!!!
+        rating: req.body.rating,
+        comment: req.body.comment
+      });
+  newReview.save(function(err, review){
+    User.findOne({username: req.user.username}, function(err, user){
+        user.reviews.push(review._id);
+        user.save(function(err){
+          if (err)
+            res.send(err.message);
+          else{
+            OurLocation.findOne({_id: req.body.locationId}, function(err, location){
+              location.reviews.push(review._id);
+              location.save(function(err){
+                if (err)
+                  res.send(err.message);
+                else
+                  res.send("SUCCESS");
+              });
+            });
+          }
+        });
+      });
+  });
+  
 })
 
 module.exports = router;
