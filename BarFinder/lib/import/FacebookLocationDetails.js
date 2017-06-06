@@ -342,7 +342,7 @@ module.exports.FacebookLocationDetails = class FacebookLocationDetails {
           location.longitude = body.location.longitude;
           location.street = body.location.street;
           location.checkins = body.checkins;
-          location.cover = body.cover.source;
+          location.cover = (body.cover != null) ? body.cover.source : undefined;
           location.description = body.description;
           location.hours = body.hours;
           location.impressum = body.impressum;
