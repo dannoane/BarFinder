@@ -17,6 +17,7 @@ var RestaurantSpecialty = require('./../lib/model/RestaurantSpecialty').Restaura
 var Review = require('./../lib/model/Review').Review;
 //name Location OurLocation so it doesn`t conflict
 var OurLocation = require('./../lib/model/Location').Location;
+var Notification = require('./../lib/model/Notification').Notification;
 
 var Group = require('./../lib/model/Group').Group;
 
@@ -140,11 +141,24 @@ router.get('/search', function(req, res, next){
 router.post('/search/makePlan', function(req, res, next){
   Group.findOne({_id: req.body.groupId}, function(err, group){
     group._location = req.body.locationId;
-    group.save(function (err){
+    group.save(function (err, group){
       if (err)
           res.send(err.message);
-        else
-          res.send("SUCCESS");
+        else{
+          var newNotification = Notification({text: 'The plan for group '+group.name+' has changed. Click notification to go to page',
+                  path: 'http://10.10.10.10:3000/group/'+group._id});
+          newNotification.save(function(err, notification){
+            User.findOne({_id: req.user._id}, function(err, user){
+              user.notifications.push(notification._id);
+              user.save(function(err){
+                if(err)
+                  res.send(err.message);
+                else
+                  res.send("SUCCESS");
+              })
+            })
+          });
+        }
     });
   });
 })
@@ -502,14 +516,19 @@ router.post('/group/:groupId/addUser',function(req, res, next){
               }
               else{
                 user.groups.push(group._id);
-                user.save(function(err){
-                  if (err){
-                    res.send(err.message);
-                  }
-                  else{
-                    res.send("SUCCESS");
-                  }
-                })
+                var newNotification = Notification({text: 'You have been added to a group. Click notification to go to page',
+                  path: 'http://10.10.10.10:3000/group/'+group._id});
+                newNotification.save(function(err, notification){
+                  user.notifications.push(notification._id);
+                  user.save(function(err){
+                    if (err){
+                      res.send(err.message);
+                    }
+                    else{
+                      res.send("SUCCESS");
+                    }
+                  })
+                })                
               }
             })
           }
@@ -527,8 +546,24 @@ router.post('/group/:groupId/deleteUser', function(req, res, next){
       group.save(function(err){
         if (err)
           res.send(err.message);
-        else
-          res.send("SUCCESS");
+        else{
+          User.findOne({username: req.user.username}, function(err, user){
+            var newNotification = Notification({text: 'You have been removed from the group' + group.name,
+                  path: '#'});
+            newNotification.save(function(err, notification){
+              if (err){
+                res.send(err.message);
+              }
+              user.notifications.push(notification._id);
+              user.save(function(err, user){
+                if (err)
+                  res.send(err.message);
+                else
+                  res.send("SUCCESS");
+              })
+            })
+          })
+        }
       });
     }
   });

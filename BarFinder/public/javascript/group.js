@@ -26,23 +26,6 @@ $(document).ready(function () {
     $("#userAddButton").click(function(){
        $("#userModal").show(); 
     });
-    $.each(users, function (i) {
-        var li = $('<li/>')
-        .addClass('list-group-item')
-        .appendTo(List);
-       
-        var a = $('<p/>')
-        .text(users[i].name + ": " + users[i].status)
-        .appendTo(li);
-        
-        var x = $('<button/>')
-        .addClass("btn btn-danger btn-xs")
-        .appendTo(a);
-        
-        var s = $('<a href = "#"/>')
-        .addClass("glyphicon glyphicon-trash")
-        .appendTo(x);
-    });
     $("li button.glyphicon-remove#removeUser").on("click",function () {
         event.stopPropagation();
         console.log(location.pathname.split('/')[2]);
@@ -53,7 +36,7 @@ $(document).ready(function () {
      });
      $('#searchButton').click(function(){
         console.log($('#inputsm').val());
-        event.stopPropagation();
+        // event.stopPropagation();
         $.post("http://10.10.10.10:3000/group/" +location.pathname.split('/')[2]+ "/findUsers", {username: $('#inputsm').val()}, function(data){
             data.forEach(function(element) {
                 $('#toAddUsers').append('<li value="ASDF" class="notificationItem"><a href="#" class="noStyle"><span class="glyphicon glyphicon-send"></span>'+ element.username +'</a><button id="confirmAddUser" value="'+ element.username +'" class="glyphicon confirmAddUser">Confirm</button></li>');
