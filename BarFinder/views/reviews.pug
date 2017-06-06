@@ -1,0 +1,137 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+    // Optional theme
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css', integrity='sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp', crossorigin='anonymous')
+    link(href='https://fonts.googleapis.com/css?family=Amatic+SC:700', rel='stylesheet')
+    script(src='https://use.fontawesome.com/39b94259c3.js')
+    // Change this accordingly --
+    link(rel='stylesheet', href='stylesheets/index.css')
+    link(rel='stylesheet', href='stylesheets/review.css')
+    title The Bar Finder
+    link(rel='icon', href='images/bariconsmall.png')
+  body
+    .container
+      nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='#') BarFinder
+          #navbar.navbar-collapse.collapse
+            ul.nav.navbar-nav
+              li.active
+                a(href='/search')
+                  i.fa.fa-home(aria-hidden='true')
+                  |  Home
+              li
+                a(href='/groups')
+                  i.fa.fa-users(aria-hidden='true')
+                  |  Groups
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='/notifications')
+                  i.fa.fa-envelope(aria-hidden='true')
+                  |  Notifications
+              li
+                a(href='/preferences')
+                  i.fa.fa-heart(aria-hidden='true')
+                  |  Preferences
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                  i.fa.fa-user-circle(aria-hidden='true')
+                  |  #{username}
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a(href='#') Logout
+          // /.nav-collapse
+        // /.container-fluid
+      #maindiv
+        h2#location
+          span.glyphicon.glyphicon-glass
+          |              #{location.name}
+        div
+          h3
+            span.label.label-default(style="font-family: 'Amatic SC', cursive;") Other stories
+          ul#otherReviews
+            each review in reviews
+              li
+                #topOfReview
+                  span(class="stars-container stars-"+review.rating) ★★★★★
+                  span#otherUsers
+                    span.glyphicon.glyphicon-user
+                    |  #{review._user.username}
+                #otherComments
+                  | #{review.comment}                   
+            li
+              #topOfReview
+                span(class="stars-container stars-"+"50") ★★★★★
+                span#otherUsers
+                  span.glyphicon.glyphicon-user
+                  |  Nume Inventat
+              #otherComments
+                | Great place, awesome food. Too loud music
+            li
+              #topOfReview
+                span.stars-container.stars-60 ★★★★★
+                span#otherUsers
+                  span.glyphicon.glyphicon-user
+                  |  Nume Inventat
+              div
+                | Great place, awesome food. Too loud music
+            li
+              #topOfReview
+                span.stars-container.stars-30 ★★★★★
+                span#otherUsers
+                  span.glyphicon.glyphicon-user
+                  |  Nume Inventat
+              div
+                | Great place, awesome food. Too loud music
+        #newReview
+          form#leaveReview
+            h2
+              span.label.label-default(style="font-family: 'Amatic SC', cursive;") Tell us about your experience
+            fieldset.rating
+              // These are the stars
+              input#star5(type='radio', name='rating', value='100')
+              label.full(for='star5', title='Awesome - 5 stars')
+              input#star4half(type='radio', name='rating', value='90')
+              label.half(for='star4half', title='Pretty good - 4.5 stars')
+              input#star4(type='radio', name='rating', value='80')
+              label.full(for='star4', title='Pretty good - 4 stars')
+              input#star3half(type='radio', name='rating', value='70')
+              label.half(for='star3half', title='Meh - 3.5 stars')
+              input#star3(type='radio', name='rating', value='60')
+              label.full(for='star3', title='Meh - 3 stars')
+              input#star2half(type='radio', name='rating', value='50')
+              label.half(for='star2half', title='Kinda bad - 2.5 stars')
+              input#star2(type='radio', name='rating', value='40')
+              label.full(for='star2', title='Kinda bad - 2 stars')
+              input#star1half(type='radio', name='rating', value='30')
+              label.half(for='star1half', title='Meh - 1.5 stars')
+              input#star1(type='radio', name='rating', value='20')
+              label.full(for='star1', title='Sucks big time - 1 star')
+              input#starhalf(type='radio', name='rating', value='10')
+              label.half(for='starhalf', title='Sucks big time - 0.5 stars')
+            br
+            br
+            .form-group
+              label
+                span.glyphicon.glyphicon-pencil
+                |  Your impression was ...
+              textarea#comment.form-control(rows='5')
+            button#submitButton.btn.btn-default(type='submit') Submit
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+      // Latest compiled and minified JavaScript
+      script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+      script(src='javascript/index.js')
+      script(src='javascript/review.js')
