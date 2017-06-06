@@ -116,8 +116,12 @@ $(document).ready(function () {
               listOfAttributes.push(element.name);
             })
           }
+          listOfAttributes = [];
           if(location.paymentOptions){
-            listOfAttributes.push(location.paymentOptions.name);
+            // listOfAttributes.push(location.paymentOptions.name);
+            location.paymentOptions.forEach(function(element){
+              listOfAttributes.push(element.name);
+            });
           }
           locationDetails.append("<span class=\"col-sm-12\">Payment: "+listOfAttributes.toString()+"</span>");
           listOfAttributes = [];
