@@ -77,11 +77,14 @@ router.get('/search', function(req, res, next){
     },
     //populate foodStyles
     function(callback){
+      locals.foodStyles = [];
       FoodStyle.find({}, function(err, foodStyles){
         if (err) return callback(err);
-        foodStyles.forEach(function(element) {
-          locals.foodStyles.push(element.name);
-        }, this);
+        if (foodStyles){
+          foodStyles.forEach(function(element) {
+            locals.foodStyles.push(element.name);
+          }, this);
+        }
         callback();
       })
     },
@@ -319,8 +322,8 @@ router.get('/preferences', function(req, res, next){
     function(callback){
         locals.preferences = {};
         Preferences.findOne({_user: req.user._id})
-          .populate('_attire')
-          .populate('_category')
+          .populate('attires')
+          .populate('categories')
           .populate('foodStyles')
           .populate('paymentOptions')
           .populate('restaurantServices')

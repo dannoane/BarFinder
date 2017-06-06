@@ -51,7 +51,7 @@ $(document).ready(function () {
         selectedValues.push($(this).val()); 
     });
     if (selectedValues.length != 0)
-    preferences.priceRange = selectedValues[0];
+    preferences.priceRange = null;
 
     preferences.latitude = null;
     preferences.longitude = null;
@@ -63,7 +63,6 @@ $(document).ready(function () {
 
   $('#savePreferences').click(function(){
     var preferences = getCustomPreferences();
-    console.log(preferences);
     $.post('http://10.10.10.10:3000/preferences',
       {preferences: preferences},
       null,
