@@ -441,4 +441,35 @@ router.post('/reviews', function(req, res, next){
   
 })
 
+router.get('/group/:groupId', function(req, res, next){
+  Group.findOne({_id: req.params['groupId']})
+    .populate('users')
+    .populate('_admin')
+    // .populate('_location')
+    .exec(function(err, group){
+      group._location = '59357530405bcc0f2d854eb4';
+      if(group._location){
+        OurLocation.findOne({_id: group._location})
+          .populate('attires')
+          .populate('categories')
+          .populate('foodStyles')
+          .populate('paymentOptions')
+          .populate('restaurantServices')
+          .populate('restaurantSpecialties')
+          .exec(function(err, location){
+            if (err)
+              res.send(err.message);
+            else{
+              console.log(location);
+              res.render('group',{username: req.user.username, group: group, location: location});
+            }
+          })
+      }
+      else{
+        res.render('group',{username: req.user.username, group: group, location: null});
+      }
+    })
+})
+
+
 module.exports = router;
