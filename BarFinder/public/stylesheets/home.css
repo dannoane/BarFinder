@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    font-family: 'Amatic SC', cursive;
+    font-size: 2em;
+}
+
+.search-buttons {
+    width: 100%;
+    font-size: 0;
+}
+
+.search-buttons>.half {
+    width: 50%;
+    display: inline-block;
+    padding: 2px;
+    font-size: auto;
+}
+
+.advanced-form {
+    display: none;
+    padding-top: 25px;
+}
+

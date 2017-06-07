@@ -1,0 +1,42 @@
+
+.notificationList{
+    margin: 5px;
+}
+.notificationList li {
+    list-style-type: none;
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+}
+.notificationList li:hover {
+    background-color: #e7e7e7;
+}
+
+
+.glyphicon-send {
+    margin-right: 10px;
+}
+
+.glyphicon-remove {
+    float: right;
+    z-index: 5px;
+}
+
+a.noStyle:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+    width: 95%;
+    height: 2%;
+    display: inline-block;
+}
+
+a.noStyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+    width: 95%;
+    height: 2%;
+    display: inline-block;
+}

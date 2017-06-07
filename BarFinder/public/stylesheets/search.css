@@ -1,0 +1,67 @@
+.chosen-container .chosen-choices .search-field:only-child,
+.chosen-container .chosen-choices .search-field:only-child input {
+    width: 100% !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.navbar-brand {
+  font-family: 'Amatic SC', cursive;
+  font-size: 2em;
+}
+
+.search-buttons {
+  width: 100%;
+  font-size: 0;
+}
+
+.search-buttons>.half {
+  width: 50%;
+  display: inline-block;
+  padding: 2px;
+  font-size: auto;
+}
+
+.adv-search-fields {
+  display: none;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+
+.locations {
+  margin-top: 20px;
+}
+
+#half-select {
+	margin-top: 10px;
+}
+
+.location-name {
+  display: inline-block;
+}
+
+.short-location .long-description {
+  display: none;
+}
+
+.short-location {
+	background: #F0F8FF;
+	
+}
+
+.dropdown-item{
+  display: block;
+}
