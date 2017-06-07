@@ -12,8 +12,9 @@
         function(data){
         $('#otherReviews').append('<li><div id="topOfReview"><span class="stars-container stars-'+rating+' ">★★★★★</span><span id="otherUsers"> <span class="glyphicon glyphicon-user"></span>' +username+ '</span></div><div id="otherComments">'+comment+'</div></li>');
         }).always(function(data, textStatus, jqXHR){
-                    $('#otherReviews').append('<li><div id="topOfReview"><span class="stars-container stars-'+rating+' ">★★★★★</span><span id="otherUsers"> <span class="glyphicon glyphicon-user"></span>' +'Me'+ '</span></div><div id="otherComments">'+comment+'</div></li>');
+                    location.reload(true);
         });  
+        location.reload(true);
    }) 
    console.log(location.pathname.split('/')[2]);
 })

@@ -26,7 +26,7 @@ html(lang='en')
             a.navbar-brand(href='http://10.10.10.10:3000/') BarFinder
           #navbar.navbar-collapse.collapse
             ul.nav.navbar-nav
-              li.active
+              li
                 a(href='/search')
                   i.fa.fa-home(aria-hidden='true')
                   |  Home
@@ -52,6 +52,8 @@ html(lang='en')
                   li
                     a(href='/logout') Logout
       div(id='content')
+        div(align='center')
+          img(src='images/cover.jpg')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')

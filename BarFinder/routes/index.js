@@ -173,6 +173,8 @@ router.post('/groups/administers', function(req, res, next){
       })
 })
 
+
+
 /* GET - return locations based on user preferences */
 router.get('/search/locations', (req, res) => {
 
@@ -353,7 +355,6 @@ router.get('/preferences', function(req, res, next){
   async.parallel(tasks, function(err){
     if (err) res.send(err);
     else{
-      //TODO:remove selected preference
       res.render('preferences', {username: req.user.username, selectables: locals});
     }
   })
@@ -414,11 +415,6 @@ router.post('/preferences', function(req, res, next){
 })
 
 router.get('/reviews/:locationId', function(req, res, next){
-  // OurLocation.findOne({_id: req.params["locationId"]})
-  //   .populate('reviews')
-  //     .exec(function(err, location){
-  //       res.render('reviews',{username: req.user.username, location: location, reviews: location.reviews});
-  //     });
   OurLocation.findOne({_id: req.params["locationId"]})
     .populate({
       path: 'reviews',
@@ -436,15 +432,19 @@ router.post('/reviews', function(req, res, next){
         rating: req.body.rating,
         comment: req.body.comment
       });
+  console.log(newReview);
   newReview.save(function(err, review){
+    if (err){
+      res.send(err.message);
+    }
     User.findOne({username: req.user.username}, function(err, user){
-        user.reviews.push(review._id);
+        user.reviews.push(newReview._id);
         user.save(function(err){
           if (err)
             res.send(err.message);
           else{
             OurLocation.findOne({_id: req.body.locationId}, function(err, location){
-              location.reviews.push(review._id);
+              location.reviews.push(newReview._id);
               location.save(function(err){
                 if (err)
                   res.send(err.message);

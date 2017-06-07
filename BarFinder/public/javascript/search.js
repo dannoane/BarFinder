@@ -77,12 +77,23 @@ $(document).ready(function () {
     if ($('#nameInput').val() && $('#nameInput').val() != "")
       preferences.name = $('#nameInput').val();
 
+        jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDCa1LUe1vOczX1hO_iGYgyo8p_jYuGOPU", function(success) {
+          preferences.latitude = success.location.lat;
+          preferences.longitude = success.location.lng;
+        })
+        .fail(function(err) {
+          alert("API Geolocation error! \n\n"+err);
+        });
+
+    console.log(preferences);
+
     return preferences;
 
   }
 
   function populateLocationsList(data){
         console.log("ENTERED CALLBACK");
+        $(".locations.list-group").empty();
         data.locations.forEach(function(location) { //TODO: how does the server send the info? only this row needs change
           $(".locations.list-group").append("<div class=\"list-group-item short-location\"><div class=\"row location\"></div><div class=\"row long-description\"></div></div>");
           var locationRow = $(".list-group-item.short-location > .row.location:last");
@@ -186,7 +197,6 @@ $(document).ready(function () {
 
   $("#advancedSearch").click(function(){
     $(".locations.list-group").empty();
-    //TODO: check transmission of null
     var preferences = getCustomPreferences();
     console.log(preferences);
     $.post("http://10.10.10.10:3000/search/locations",{

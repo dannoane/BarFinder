@@ -11,7 +11,10 @@ $(document).ready(function () {
     $('#saveButton').click(function () {
         $('#dateEdit').hide();
     });
-    
+    $('body').click(function (event) {
+        if ($(event.target).is('#mapModal')) {
+            $('#mapModal').hide();
+        }})
     $('#addButton').click(function(){
        $('#userModal').hide(); 
     });
@@ -21,11 +24,34 @@ $(document).ready(function () {
             google.maps.event.trigger(map, 'resize') ;
         });
     
-    $('#dateDiv').text($('#dateDiv').text().slice(0, 24));
+    $('#dateDiv').text($('#dateDiv').text().slice(0, 35));
 
     $("#userAddButton").click(function(){
        $("#userModal").show(); 
     });
+    $('#viewMap').click(function(){
+        $('#mapModal').show();
+        var uluru = {
+        lat: parseFloat($('#latitude').text()),
+        lng: parseFloat($('#longitude').text())
+        };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 18,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+        google.maps.event.trigger(map, 'resize') ;
+        
+    })
+    $('#setDate').click(function(){
+        // console.log($('#dateField').val());
+        $.post("http://10.10.10.10:3000/group/" + location.pathname.split('/')[2] + '/setDate', {date: $('#dateField').val()}, function(response){
+            location.reload(true);
+        })
+    })
     $("li button.glyphicon-remove#removeUser").on("click",function () {
         event.stopPropagation();
         console.log(location.pathname.split('/')[2]);

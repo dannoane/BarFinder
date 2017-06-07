@@ -13,10 +13,11 @@ html(lang='en')
     link(rel='stylesheet', href='/stylesheets/home.css')
     link(rel='stylesheet', href='/stylesheets/search.css')
     link(rel='stylesheet', href='/stylesheets/group.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-datetimepicker.min.css')
     title The Bar Finder
     link(rel='icon', href='images/bariconsmall.png')
   body
-    .container
+    .container     
       nav.navbar.navbar-default
         .container-fluid
           .navbar-header
@@ -54,6 +55,9 @@ html(lang='en')
                   li
                     a(href='/logout') Logout
       div(id='content')
+        #mapModal.modal.map
+          .modal-content
+            #map  
         if location
           .locations.list-group
             .list-group-item.short-location
@@ -85,8 +89,18 @@ html(lang='en')
                 span.col-sm-12 Specialties: 
                   each elem in location.restaurantSpecialties
                     |#{elem.name},
-          div#dateDiv #{group.date}   
-        span.label.label-default(style="font-family: 'Amatic SC', cursive;") Members:
+          div#dateDiv Current date: #{group.date}
+          |New date:
+          input(type='datetime-local', name='date', id='dateField')
+          button#setDate.btn Save 
+          br
+          button#viewMap.btn View on map  
+          br
+          p#latitude(style='display:none') #{location.latitude}       
+          p#longitude(style='display:none') #{location.longitude}       
+        //- span.label.label-default(style="font-family: 'Amatic SC', cursive;") Members:
+        hr
+        button.btn Members:
         ul#prevUsers.notificationList
           each user in group.users
               li.notificationItem(value="ASDF")
@@ -107,3 +121,7 @@ html(lang='en')
     script(src='/chosen/chosen.jquery.min.js')
     script(src='/javascript/search.js')
     script(src='/javascript/group.js')
+    script(src='/javascript/bootstrap-datetimepicker.min.js')
+    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBMeCTSDqLy87PRRQRjztgaowHCqvKEkhs')
+
+

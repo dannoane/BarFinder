@@ -40,3 +40,128 @@ a.noStyle:visited {
     height: 2%;
     display: inline-block;
 }
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    font-family: 'Amatic SC', cursive;
+    font-size: 2em;
+}
+
+.search-buttons {
+    width: 100%;
+    font-size: 0;
+}
+
+.search-buttons>.half {
+    width: 50%;
+    display: inline-block;
+    padding: 2px;
+    font-size: auto;
+}
+
+.advanced-form {
+    display: none;
+    padding-top: 25px;
+}
+
+h3 {
+    text-align: center;
+}
+
+.buttons {
+    width: 60%;
+    display: inline;
+    overflow: auto;
+    white-space: nowrap;
+    margin: 0px auto;
+}
+
+input .first {
+    height: 110%;
+}
+
+.buttons .first {
+    padding: 0px 20%;
+    float: left;
+}
+
+.buttons .second {
+    padding: 0px 20%;
+    float: right;
+}
+
+.plan {
+    text-align: center;
+   
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 15%;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+#people {
+    display: flex;
+    justify-content: center;
+}
+
+#people ul li p button a{
+    color:#FFFFFF;
+    text-decoration: none;
+}
+#people ul li p button{
+    margin-left: 10px;
+    display: none;
+}
+#people ul li p:hover button{
+    display: inline-block;
+}
+#map {
+  height: 400px;
+  width: 100%;
+ }
+#map * {
+    overflow:visible;
+}
