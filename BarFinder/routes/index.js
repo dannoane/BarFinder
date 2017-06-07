@@ -29,7 +29,7 @@ var _ = require('lodash');
 
 
 // ensure user is loged in
-router.all(/^\/(?!login).*$/, require('connect-ensure-login').ensureLoggedIn());
+router.all(/^\/(?!login|register).*$/, require('connect-ensure-login').ensureLoggedIn());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -262,11 +262,11 @@ router.post('/groups', function(req, res, next){
                 res.end();
             }
           });
-        } 
+        }
       })
     }
   });
-  
+
 })
 
 router.get('/preferences', function(req, res, next){
@@ -386,7 +386,7 @@ router.post('/preferences', function(req, res, next){
           }
         })
 
-      } 
+      }
       else{//user has no preferences yet
         var newPreference = Preferences({
           _user: req.user._id,
@@ -409,7 +409,7 @@ router.post('/preferences', function(req, res, next){
             res.send("SUCCESS");
           }
         })
-      } 
+      }
     }
   })
 })
@@ -427,7 +427,7 @@ router.get('/reviews/:locationId', function(req, res, next){
 
 router.post('/reviews', function(req, res, next){
   var newReview = Review({
-        _user: req.user._id, 
+        _user: req.user._id,
         _location: req.body.locationId, // TODO: check this!!!
         rating: req.body.rating,
         comment: req.body.comment
@@ -456,7 +456,7 @@ router.post('/reviews', function(req, res, next){
         });
       });
   });
-  
+
 })
 
 router.get('/group/:groupId', function(req, res, next){
@@ -528,7 +528,7 @@ router.post('/group/:groupId/addUser',function(req, res, next){
                       res.send("SUCCESS");
                     }
                   })
-                })                
+                })
               }
             })
           }

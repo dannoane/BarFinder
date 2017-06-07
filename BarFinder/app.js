@@ -18,7 +18,7 @@ passport.use(new Strategy(
     User.findOne({ 'username': username }, (err, user) => {
       const hash = crypto.createHash('sha256');
       hash.update(password);
-
+      
       if (err)
         return cb(err);
       if (!user)

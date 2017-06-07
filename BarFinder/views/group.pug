@@ -70,7 +70,7 @@ html(lang='en')
                     | See More
                     i.fa.fa-caret-down(aria-hidden='true')
                 span.col-sm-offset-1.col-sm-2.goto-rating
-                  a(href='/reviews/59357530405bcc0f2d854eb4') Give a rating                
+                  a(href='http://10.10.10.10:3000/reviews/' + location._id) Give a rating                
               .row.long-description(style='display: none;')
                 span.col-sm-12 Phone: #{location.phone}
                 span.col-sm-12 About: #{location.about}
@@ -123,5 +123,3 @@ html(lang='en')
     script(src='/javascript/group.js')
     script(src='/javascript/bootstrap-datetimepicker.min.js')
     script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBMeCTSDqLy87PRRQRjztgaowHCqvKEkhs')
-
-
